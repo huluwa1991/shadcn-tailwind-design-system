@@ -1,80 +1,150 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-  }
+@theme {
+  /* 颜色系统 */
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(0 0% 4%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(0 0% 4%);
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(0 0% 4%);
+  --color-primary: hsl(213 100% 50%);
+  --color-primary-foreground: hsl(0 0% 98%);
+  --color-secondary: hsl(0 0% 96%);
+  --color-secondary-foreground: hsl(0 0% 9%);
+  --color-muted: hsl(0 0% 96%);
+  --color-muted-foreground: hsl(0 0% 45%);
+  --color-accent: hsl(0 0% 96%);
+  --color-accent-foreground: hsl(0 0% 9%);
+  --color-destructive: hsl(0 84% 45%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-success: hsl(142 76% 36%);
+  --color-success-foreground: hsl(0 0% 100%);
+  --color-warning: hsl(45 93% 47%);
+  --color-warning-foreground: hsl(0 0% 100%);
+  --color-border: hsl(0 0% 90%);
+  --color-input: hsl(0 0% 90%);
+  --color-ring: hsl(0 0% 63%);
+  --color-chart-1: hsl(213 77% 78%);
+  --color-chart-2: hsl(213 77% 66%);
+  --color-chart-3: hsl(213 82% 54%);
+  --color-chart-4: hsl(213 82% 47%);
+  --color-chart-5: hsl(213 75% 40%);
+  --color-sidebar: hsl(0 0% 96.3%);
+  --color-sidebar-foreground: hsl(0 0% 4%);
+  --color-sidebar-primary: hsl(0 0% 9%);
+  --color-sidebar-primary-foreground: hsl(0 0% 98%);
+  --color-sidebar-accent: hsl(0 0% 93.7%);
+  --color-sidebar-accent-foreground: hsl(0 0% 9%);
+  --color-sidebar-selected: hsl(0 0% 91%);
+  --color-sidebar-selected-foreground: hsl(0 0% 9%);
+  --color-sidebar-ring: hsl(0 0% 63%);
+  --color-container: hsl(0 0% 98.8%);
+  --color-container-foreground: hsl(0 0% 4%);
+  --color-container-border: hsl(0 0% 90%);
+  --color-block-layout: hsl(0 0% 100%);
+  --color-block-layout-foreground: hsl(0 0% 4%);
+  --color-block-layout-border: hsl(0 0% 90%);
+  
+  /* 字体系统 */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Source Han Sans SC', 'WenQuanYi Micro Hei', Arial, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  /* 圆角系统 */
+  --radius: 0.625rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  /* 阴影系统 */
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  
+  /* 间距系统 */
+  --spacing: 0.25rem;
 }
 
 @layer base {
-  * {
-    @apply border-border;
-    @font-face {
-      font-family: 'Quicksand';
-      src: url('/fonts/Quicksand.tff');
-    }
+  /* 暗色模式覆盖 */
+  .dark {
+    --color-background: hsl(0 0% 4%);
+    --color-foreground: hsl(0 0% 98%);
+    --color-card: hsl(0 0% 9%);
+    --color-card-foreground: hsl(0 0% 98%);
+    --color-popover: hsl(0 0% 15%);
+    --color-popover-foreground: hsl(0 0% 98%);
+    --color-primary: hsl(0 0% 90%);
+    --color-primary-foreground: hsl(0 0% 9%);
+    --color-secondary: hsl(0 0% 15%);
+    --color-secondary-foreground: hsl(0 0% 98%);
+    --color-muted: hsl(0 0% 15%);
+    --color-muted-foreground: hsl(0 0% 63%);
+    --color-accent: hsl(0 0% 25%);
+    --color-accent-foreground: hsl(0 0% 98%);
+    --color-destructive: hsl(0 84% 70%);
+    --color-destructive-foreground: hsl(0 0% 98%);
+    --color-success: hsl(142 71% 45%);
+    --color-success-foreground: hsl(0 0% 98%);
+    --color-warning: hsl(45 93% 58%);
+    --color-warning-foreground: hsl(0 0% 98%);
+    --color-border: hsl(0 0% 16%);
+    --color-input: hsl(0 0% 20%);
+    --color-ring: hsl(0 0% 45%);
+    --color-sidebar: hsl(220 14% 3.5%);
+    --color-sidebar-foreground: hsl(0 0% 98%);
+    --color-sidebar-primary: hsl(213 79% 50%);
+    --color-sidebar-primary-foreground: hsl(0 0% 98%);
+    --color-sidebar-accent: hsl(220 14% 8.6%);
+    --color-sidebar-accent-foreground: hsl(0 0% 98%);
+    --color-sidebar-selected: hsl(220 6% 12.5%);
+    --color-sidebar-selected-foreground: hsl(0 0% 98%);
+    --color-sidebar-ring: hsl(0 0% 32%);
+    --color-container: hsl(220 6% 6.5%);
+    --color-container-foreground: hsl(0 0% 98%);
+    --color-container-border: hsl(0 0% 16%);
+    --color-block-layout: hsl(0 0% 9%);
+    --color-block-layout-foreground: hsl(0 0% 98%);
+    --color-block-layout-border: hsl(0 0% 16%);
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  /* 保留原有的自定义样式 */
+  .grid-system {
+    @apply grid gap-4 p-4 border border-border rounded-lg bg-card;
+  }
+
+  .grid-system.cols-1 {
+    @apply grid-cols-1;
+  }
+
+  .grid-system.cols-2 {
+    @apply grid-cols-2;
+  }
+
+  .grid-system.cols-3 {
+    @apply grid-cols-3;
+  }
+
+  .grid-system.cols-4 {
+    @apply grid-cols-4;
+  }
+
+  .grid-item {
+    @apply p-4 bg-accent text-accent-foreground rounded border border-border;
   }
 }
