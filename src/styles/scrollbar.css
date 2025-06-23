@@ -1,0 +1,148 @@
+/* 滚动条样式系统 */
+
+/* 滚动条设计变量 */
+:root {
+  /* 滚动条颜色变量 */
+  --scrollbar-thumb-light: rgba(176, 173, 171, 0.5);
+  --scrollbar-thumb-dark: rgba(73, 73, 69, 0.5);
+  --scrollbar-track: transparent;
+  
+  /* 滚动条动画变量 */
+  --scrollbar-fade-in-duration: 0.3s;
+  --scrollbar-fade-out-duration: 0.4s;
+  --scrollbar-fade-in-easing: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --scrollbar-fade-out-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --scrollbar-hover-scale: 1.1;
+  
+  /* 滚动条尺寸变量 */
+  --scrollbar-width: 4px;
+  --scrollbar-height: 4px;
+  --scrollbar-border-radius: 4px;
+}
+
+/* WebKit 浏览器滚动条样式 (Chrome, Safari, Edge) */
+@layer base {
+  ::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+    height: var(--scrollbar-height);
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+
+  /* 默认状态：滚动条隐藏 */
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: var(--scrollbar-border-radius);
+    transition: all var(--scrollbar-fade-out-duration) var(--scrollbar-fade-out-easing);
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  /* 悬停状态：显示滚动条 */
+  *:hover::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-light);
+    opacity: 1;
+    transform: scale(1);
+    transition: all var(--scrollbar-fade-in-duration) var(--scrollbar-fade-in-easing);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-light);
+    opacity: 1;
+    transform: scale(var(--scrollbar-hover-scale));
+    transition: all 0.2s ease-out;
+  }
+
+  /* 暗色模式下的滚动条 */
+  .dark *:hover::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-dark);
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-dark);
+    opacity: 1;
+    transform: scale(var(--scrollbar-hover-scale));
+  }
+}
+
+/* Firefox 浏览器滚动条样式 */
+@layer base {
+  html, body {
+    scrollbar-width: thin;
+    scrollbar-color: transparent var(--scrollbar-track);
+    transition: scrollbar-color var(--scrollbar-fade-out-duration) var(--scrollbar-fade-out-easing);
+  }
+
+  html:hover, body:hover {
+    scrollbar-color: var(--scrollbar-thumb-light) var(--scrollbar-track);
+    transition: scrollbar-color var(--scrollbar-fade-in-duration) var(--scrollbar-fade-in-easing);
+  }
+
+  .dark html, .dark body {
+    scrollbar-color: transparent var(--scrollbar-track);
+    transition: scrollbar-color var(--scrollbar-fade-out-duration) var(--scrollbar-fade-out-easing);
+  }
+
+  .dark html:hover, .dark body:hover {
+    scrollbar-color: var(--scrollbar-thumb-dark) var(--scrollbar-track);
+    transition: scrollbar-color var(--scrollbar-fade-in-duration) var(--scrollbar-fade-in-easing);
+  }
+
+  /* 全局元素滚动条 Firefox 支持 */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: transparent var(--scrollbar-track);
+    transition: scrollbar-color var(--scrollbar-fade-out-duration) var(--scrollbar-fade-out-easing);
+  }
+
+  *:hover {
+    scrollbar-color: var(--scrollbar-thumb-light) var(--scrollbar-track);
+    transition: scrollbar-color var(--scrollbar-fade-in-duration) var(--scrollbar-fade-in-easing);
+  }
+
+  .dark * {
+    scrollbar-color: transparent var(--scrollbar-track);
+    transition: scrollbar-color var(--scrollbar-fade-out-duration) var(--scrollbar-fade-out-easing);
+  }
+
+  .dark *:hover {
+    scrollbar-color: var(--scrollbar-thumb-dark) var(--scrollbar-track);
+    transition: scrollbar-color var(--scrollbar-fade-in-duration) var(--scrollbar-fade-in-easing);
+  }
+}
+
+/* 滚动条工具类 */
+@layer utilities {
+  /* 隐藏滚动条但保持滚动功能 */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 强制显示滚动条 */
+  .scrollbar-visible *::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-light) !important;
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+
+  .dark .scrollbar-visible *::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-dark) !important;
+  }
+
+  .scrollbar-visible * {
+    scrollbar-color: var(--scrollbar-thumb-light) var(--scrollbar-track) !important;
+  }
+
+  .dark .scrollbar-visible * {
+    scrollbar-color: var(--scrollbar-thumb-dark) var(--scrollbar-track) !important;
+  }
+} 

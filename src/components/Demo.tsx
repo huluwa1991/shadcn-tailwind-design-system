@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Sidebar } from './ui/sidebar';
-import { PageContainer } from './ui/page-container';
-import { PageHeaderWrapper } from './ui/page-header';
 import { 
+  Sidebar,
+  PageContainer,
+  PageHeaderWrapper,
   Table, 
   TableWrapper, 
   TableHeader, 
@@ -13,10 +13,8 @@ import {
   StatusCell,
   ActionButtonsCell,
   IdCell,
-  NameCell
-} from './ui/table';
-import { Button } from './ui/button';
-import { 
+  NameCell,
+  Button,
   Select, 
   SelectContent, 
   SelectItem, 
@@ -25,7 +23,7 @@ import {
   SelectContainer,
   MultiSelectTrigger,
   MultiSelectItem
-} from './ui/select';
+} from './ui';
 
 // 模拟用户数据
 const mockUsers = [
@@ -233,7 +231,6 @@ export const Demo: React.FC = () => {
                 </Button>
               </>
             }
-            containerClassName="mb-6"
           />
           
           {/* 表格内容 */}

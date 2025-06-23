@@ -1,34 +1,14 @@
-import { Modal } from './modal';
+// Base Components
+export { Button, buttonVariants } from './base/button';
+export { Input } from './base/input';
+export { Label } from './base/label';
+export { Textarea } from './base/textarea';
+export { Avatar, AvatarUserInfo, AvatarWithInfo, avatarVariants } from './base/avatar';
+export { Badge, badgeVariants } from './base/badge';
 
-export { Alert, AlertTitle, AlertDescription } from './alert';
-export { Avatar, AvatarUserInfo, AvatarWithInfo, avatarVariants } from './avatar';
-export { Badge, badgeVariants } from './badge';
-export { BlockLayout, blockLayoutVariants } from './block-layout';
-export { PageContainer, pageContainerVariants, contentVariants } from './page-container';
-export { 
-  PageHeader,
-  PageHeaderHeader,
-  PageHeaderBack,
-  PageHeaderTitle,
-  PageHeaderActions,
-  PageHeaderToolbar,
-  PageHeaderFilters,
-  PageHeaderToolbarActions,
-  PageHeaderContent,
-  PageHeaderTitleRow,
-  PageHeaderTitleSection,
-  PageHeaderWrapper,
-  pageHeaderVariants,
-  pageHeaderHeaderVariants,
-  pageHeaderContentVariants,
-} from './page-header';
-export { Button, buttonVariants } from './button';
-export { Checkbox, CheckboxLabel, checkboxVariants, checkboxLabelVariants } from './checkbox';
-export { DatePicker, DateRangePicker } from './date-picker';
-export { Input } from './input';
-export { Label } from './label';
-export { Logo } from './logo';
-export { RadioGroup, RadioGroupItem, RadioGroupLabel, radioGroupVariants } from './radio-group';
+// Data Entry Components
+export { Checkbox, CheckboxLabel, checkboxVariants, checkboxLabelVariants } from './data-entry/checkbox';
+export { RadioGroup, RadioGroupItem, RadioGroupLabel, radioGroupVariants } from './data-entry/radio-group';
 export { 
   Select, 
   SelectGroup, 
@@ -42,47 +22,17 @@ export {
   SelectSeparator, 
   SelectScrollUpButton, 
   SelectScrollDownButton,
+  SelectContainer,
   selectTriggerVariants,
-} from './select';
-export type { SelectTriggerBaseProps, MultiSelectTriggerProps, MultiSelectItemProps } from './select';
-export { Switch, switchVariants } from './switch';
-export { Tag, tagVariants } from './tags';
-export { FileUpload } from './file-upload';
-export { FilterItem, FilterGroup, filterVariants, filterGroupVariants } from './filter';
-export type { FilterOption, FilterItemProps, FilterGroupProps } from './filter';
-export { 
-  TableWrapper,
-  Table,
-  TableHeader,
-  TableBody,
-  TableFooter,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableCaption,
-  CheckboxCell,
-  CheckboxHeaderCell,
-  ActionCell,
-  TableEmptyState,
-  tableWrapperVariants,
-  tableVariants,
-  tableHeaderVariants,
-  tableRowVariants,
-  tableCellVariants,
-} from './table';
-export { Textarea } from './textarea';
-export { Typography, typographyVariants } from './typography';
-export { SearchInput, searchVariants } from './search';
-export { Modal };
-export {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from './pagination';
+} from './data-entry/select';
+export type { SelectContainerProps, SelectTriggerBaseProps, MultiSelectTriggerProps, MultiSelectItemProps } from './data-entry/select';
+export { Switch, switchVariants } from './data-entry/switch';
+export { DatePicker, DateRangePicker } from './data-entry/date-picker';
+export { FileUpload } from './data-entry/file-upload';
+export { SearchInput, searchVariants } from './data-entry/search';
+export { Calendar, CalendarDayButton } from './data-entry/calendar';
+
+// Navigation Components
 export {
   Sidebar,
   SidebarHeader,
@@ -99,9 +49,77 @@ export {
   sidebarMenuButtonVariants,
   sidebarGroupLabelVariants,
   sidebarMenuActionVariants,
-} from './sidebar'; 
-export { Steps, stepsVariants } from './steps';
-export type { StepItem, StepsProps } from './steps'; 
-export { Tabs, TabsList, TabsTrigger, TabsContent } from './tabs';
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './tooltip';
-export { Popconfirm } from './popconfirm'; 
+} from './navigation/sidebar';
+export { Tabs, TabsList, TabsTrigger, TabsContent } from './navigation/tabs';
+export { Steps, stepsVariants } from './navigation/steps';
+export type { StepItem, StepsProps } from './navigation/steps';
+export {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from './navigation/pagination';
+export { Command } from './navigation/command';
+
+// Feedback Components
+export { Alert, AlertTitle, AlertDescription } from './feedback/alert';
+export { Modal } from './feedback/modal';
+export { Dialog } from './feedback/dialog';
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './feedback/tooltip';
+export { Popconfirm } from './feedback/popconfirm';
+export { Popover } from './feedback/popover';
+
+// Data Display Components
+export { 
+  TableWrapper,
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+  CheckboxCell,
+  CheckboxHeaderCell,
+  ActionCell,
+  TableEmptyState,
+  StatusCell,
+  ActionButtonsCell,
+  IdCell,
+  NameCell,
+  tableWrapperVariants,
+  tableVariants,
+  tableHeaderVariants,
+  tableRowVariants,
+  tableCellVariants,
+} from './data-display/table';
+export { Typography, typographyVariants } from './data-display/typography';
+export { Tag, tagVariants } from './data-display/tags';
+export { FilterItem, FilterGroup, filterVariants, filterGroupVariants } from './data-display/filter';
+export type { FilterOption, FilterItemProps, FilterGroupProps } from './data-display/filter';
+
+// Layout Components
+export { PageContainer, pageContainerVariants, contentVariants } from './layout/page-container';
+export { 
+  PageHeader,
+  PageHeaderHeader,
+  PageHeaderBack,
+  PageHeaderTitle,
+  PageHeaderActions,
+  PageHeaderToolbar,
+  PageHeaderFilters,
+  PageHeaderToolbarActions,
+  PageHeaderContent,
+  PageHeaderTitleRow,
+  PageHeaderTitleSection,
+  PageHeaderWrapper,
+  pageHeaderVariants,
+  pageHeaderHeaderVariants,
+  pageHeaderContentVariants,
+} from './layout/page-header';
+export { BlockLayout, blockLayoutVariants } from './layout/block-layout';
+export { Logo } from './layout/logo'; 
