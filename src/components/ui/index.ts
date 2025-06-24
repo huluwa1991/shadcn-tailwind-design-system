@@ -1,12 +1,13 @@
 // Base Components
 export { Button, buttonVariants } from './base/button';
-export { Input } from './base/input';
 export { Label } from './base/label';
-export { Textarea } from './base/textarea';
 export { Avatar, AvatarUserInfo, AvatarWithInfo, avatarVariants } from './base/avatar';
 export { Badge, badgeVariants } from './base/badge';
+export { Typography, typographyVariants } from './base/typography';
 
 // Data Entry Components
+export { Input } from './data-entry/input';
+export { Textarea } from './data-entry/textarea';
 export { Checkbox, CheckboxLabel, checkboxVariants, checkboxLabelVariants } from './data-entry/checkbox';
 export { RadioGroup, RadioGroupItem, RadioGroupLabel, radioGroupVariants } from './data-entry/radio-group';
 export { 
@@ -104,7 +105,6 @@ export {
   tableRowVariants,
   tableCellVariants,
 } from './data-display/table';
-export { Typography, typographyVariants } from './data-display/typography';
 export { Tag, tagVariants } from './data-display/tags';
 export { FilterItem, FilterGroup, filterVariants, filterGroupVariants } from './data-display/filter';
 export type { FilterOption, FilterItemProps, FilterGroupProps } from './data-display/filter';

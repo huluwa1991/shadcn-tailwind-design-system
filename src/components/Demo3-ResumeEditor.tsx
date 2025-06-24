@@ -592,7 +592,7 @@ export const Resume: React.FC = () => {
           )}
 
           {/* 简历内容区域 */}
-          <div className="space-y-8">
+          <div className="space-y-10">
             {/* 基本信息 */}
             <div>
               <div className="mb-6">
@@ -714,7 +714,7 @@ export const Resume: React.FC = () => {
               </div>
               
               {/* 工作经历 */}
-              <div className="mb-8">
+              <div className="mb-10">
                 <div className="mb-6 flex items-center justify-between">
                   <Typography variant="h3">工作经历</Typography>
                   <Button 
@@ -837,7 +837,7 @@ export const Resume: React.FC = () => {
                 
                 {resumeData.workExperiences.length === 0 && (
                   <BlockLayout>
-                    <div className="text-center py-8 text-gray-500">
+                    <div className="text-center py-10 text-gray-500">
                       <Typography variant="muted">
                         暂无工作经历，点击上方按钮添加
                       </Typography>
@@ -848,7 +848,7 @@ export const Resume: React.FC = () => {
               </div>
 
               {/* 项目经历 */}
-              <div className="mb-8">
+              <div className="mb-10">
                 <div className="mb-6 flex items-center justify-between">
                   <Typography variant="h3">项目经历</Typography>
                   <Button 
@@ -929,7 +929,7 @@ export const Resume: React.FC = () => {
                 
                 {resumeData.projectExperiences.length === 0 && (
                   <BlockLayout>
-                    <div className="text-center py-8 text-gray-500">
+                    <div className="text-center py-10 text-gray-500">
                       <Typography variant="muted">
                         暂无项目经历，点击上方按钮添加
                       </Typography>
@@ -940,7 +940,7 @@ export const Resume: React.FC = () => {
               </div>
 
               {/* 教育经历 */}
-              <div className="mb-8">
+              <div className="mb-10">
                 <div className="mb-6 flex items-center justify-between">
                   <Typography variant="h3">教育经历</Typography>
                   <Button 
@@ -1076,7 +1076,7 @@ export const Resume: React.FC = () => {
                 
                 {resumeData.educations.length === 0 && (
                   <BlockLayout>
-                    <div className="text-center py-8 text-gray-500">
+                    <div className="text-center py-10 text-gray-500">
                       <Typography variant="muted">
                         暂无教育经历，点击上方按钮添加
                       </Typography>
@@ -1157,7 +1157,7 @@ export const Resume: React.FC = () => {
                 
                 {resumeData.awards.length === 0 && (
                   <BlockLayout>
-                    <div className="text-center py-8 text-gray-500">
+                    <div className="text-center py-10 text-gray-500">
                       <Typography variant="muted">
                         暂无奖励记录，点击上方按钮添加
                       </Typography>
@@ -1170,7 +1170,7 @@ export const Resume: React.FC = () => {
             {/* 论文发表 */}
             <div>
               <div className="mb-6 flex items-center justify-between">
-                <Typography variant="h2">论文发表</Typography>
+                <Typography variant="h3">论文发表</Typography>
                 <Button 
                   variant="outline" 
                   size="sm" 
@@ -1244,7 +1244,7 @@ export const Resume: React.FC = () => {
                 
                 {resumeData.papers.length === 0 && (
                   <BlockLayout>
-                    <div className="text-center py-8 text-gray-500">
+                    <div className="text-center py-10 text-gray-500">
                       <Typography variant="muted">
                         暂无论文发表记录，点击上方按钮添加
                       </Typography>
@@ -1257,7 +1257,7 @@ export const Resume: React.FC = () => {
             {/* 代码仓库 */}
             <div>
               <div className="mb-6 flex items-center justify-between">
-                <Typography variant="h2">代码仓库</Typography>
+                <Typography variant="h3">代码仓库</Typography>
                 <Button 
                   variant="outline" 
                   size="sm" 
@@ -1323,7 +1323,7 @@ export const Resume: React.FC = () => {
                 
                 {resumeData.repositories.length === 0 && (
                   <BlockLayout>
-                    <div className="text-center py-8 text-gray-500">
+                    <div className="text-center py-10 text-gray-500">
                       <Typography variant="muted">
                         暂无代码仓库记录，点击上方按钮添加
                       </Typography>
@@ -1336,7 +1336,7 @@ export const Resume: React.FC = () => {
             {/* 专利 */}
             <div>
               <div className="mb-6 flex items-center justify-between">
-                <Typography variant="h2">专利</Typography>
+                <Typography variant="h3">专利</Typography>
                 <Button 
                   variant="outline" 
                   size="sm" 
@@ -1390,7 +1390,7 @@ export const Resume: React.FC = () => {
                 
                 {resumeData.patents.length === 0 && (
                   <BlockLayout>
-                    <div className="text-center py-8 text-gray-500">
+                    <div className="text-center py-10 text-gray-500">
                       <Typography variant="muted">
                         暂无专利记录，点击上方按钮添加
                       </Typography>
@@ -1403,7 +1403,7 @@ export const Resume: React.FC = () => {
             {/* 社交媒体 */}
             <div>
               <div className="mb-6 flex items-center justify-between">
-                <Typography variant="h2">社交媒体</Typography>
+                <Typography variant="h3">社交媒体</Typography>
                 <Button 
                   variant="outline" 
                   size="sm" 
@@ -1481,7 +1481,7 @@ export const Resume: React.FC = () => {
                 
                 {resumeData.socialMedia.length === 0 && (
                   <BlockLayout>
-                    <div className="text-center py-8 text-gray-500">
+                    <div className="text-center py-10 text-gray-500">
                       <Typography variant="muted">
                         暂无社交媒体记录，点击上方按钮添加
                       </Typography>

@@ -8,9 +8,9 @@ const typographyVariants = cva('', {
   variants: {
     variant: {
       // 标题系列
-      h1: 'text-xl font-bold leading-none', // 页面级别的主标题，一个页面只能有一个
-      h2: 'text-lg font-bold leading-none',  // 次级标题，用于模块的标题
-      h3: 'text-base font-bold leading-none', // 次次级标题，用于模块内部的标题
+      h1: 'text-2xl font-bold leading-none', // 页面级别的主标题，一个页面只能有一个
+      h2: 'text-xl font-bold leading-none',  // 次级标题，用于模块的标题
+      h3: 'text-lg leading-none', // 次次级标题，用于模块内部的标题
       
       // 正文
       body: 'text-sm leading-normal',

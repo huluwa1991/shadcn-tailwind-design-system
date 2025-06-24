@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Button } from '../base/button';
-import { Typography } from '../data-display/typography';
+import { Typography } from '../base/typography';
 
 // PageHeader 主容器 - 移除默认间距
 const pageHeaderVariants = cva(

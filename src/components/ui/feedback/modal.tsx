@@ -4,7 +4,7 @@ import { X } from 'lucide-react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
-import { Typography } from '../data-display/typography';
+import { Typography } from '../base/typography';
 import { Button } from '../base/button';
 
 const modalVariants = cva(
