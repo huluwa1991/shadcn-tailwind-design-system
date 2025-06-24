@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Resume } from '../components/Resume';
+import { Resume } from '../components/Demo3-ResumeEditor';
 
 const meta: Meta<typeof Resume> = {
-  title: 'Pages/Resume',
+  title: 'Pages/Demo3-ResumeEditor',
   component: Resume,
   parameters: {
     layout: 'fullscreen',
@@ -19,7 +19,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  name: '默认简历页面',
+  name: '简历编辑器',
   parameters: {
     docs: {
       description: {
@@ -30,7 +30,7 @@ export const Default: Story = {
 };
 
 export const EmptyState: Story = {
-  name: '空状态简历页面',
+  name: '空状态简历编辑器',
   parameters: {
     docs: {
       description: {

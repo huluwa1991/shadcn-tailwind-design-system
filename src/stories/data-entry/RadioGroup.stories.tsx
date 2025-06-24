@@ -30,24 +30,18 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: (args) => (
     <RadioGroup defaultValue="option1" {...args}>
-      <div className="flex items-center space-x-2">
+      <RadioGroupLabel variant="default">
         <RadioGroupItem value="option1" id="option1" />
-        <label htmlFor="option1" className="text-sm">
-          选项一
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
+        <span>选项一</span>
+      </RadioGroupLabel>
+      <RadioGroupLabel variant="default">
         <RadioGroupItem value="option2" id="option2" />
-        <label htmlFor="option2" className="text-sm">
-          选项二
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
+        <span>选项二</span>
+      </RadioGroupLabel>
+      <RadioGroupLabel variant="default">
         <RadioGroupItem value="option3" id="option3" />
-        <label htmlFor="option3" className="text-sm">
-          选项三
-        </label>
-      </div>
+        <span>选项三</span>
+      </RadioGroupLabel>
     </RadioGroup>
   ),
   parameters: {
@@ -63,24 +57,18 @@ export const Default: Story = {
 export const Horizontal: Story = {
   render: (args) => (
     <RadioGroup defaultValue="option1" layout="horizontal" {...args}>
-      <div className="flex items-center space-x-2">
+      <RadioGroupLabel variant="default">
         <RadioGroupItem value="option1" id="horizontal-option1" />
-        <label htmlFor="horizontal-option1" className="text-sm">
-          选项一
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
+        <span>选项一</span>
+      </RadioGroupLabel>
+      <RadioGroupLabel variant="default">
         <RadioGroupItem value="option2" id="horizontal-option2" />
-        <label htmlFor="horizontal-option2" className="text-sm">
-          选项二
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
+        <span>选项二</span>
+      </RadioGroupLabel>
+      <RadioGroupLabel variant="default">
         <RadioGroupItem value="option3" id="horizontal-option3" />
-        <label htmlFor="horizontal-option3" className="text-sm">
-          选项三
-        </label>
-      </div>
+        <span>选项三</span>
+      </RadioGroupLabel>
     </RadioGroup>
   ),
   parameters: {
@@ -188,22 +176,16 @@ export const WithDisabledOptions: Story = {
         <h3 className="text-sm font-medium text-muted-foreground">简单样式 - 单个选项禁用</h3>
         <RadioGroup defaultValue="option1">
           <RadioGroupLabel variant="default">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="option1" id="simple-option1" />
-              <span>可用选项一</span>
-            </div>
+            <RadioGroupItem value="option1" id="simple-option1" />
+            <span>可用选项一</span>
           </RadioGroupLabel>
           <RadioGroupLabel variant="default">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="option2" id="simple-option2" disabled />
-              <span className="text-muted-foreground">禁用选项二</span>
-            </div>
+            <RadioGroupItem value="option2" id="simple-option2" disabled />
+            <span className="text-muted-foreground">禁用选项二</span>
           </RadioGroupLabel>
           <RadioGroupLabel variant="default">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="option3" id="simple-option3" />
-              <span>可用选项三</span>
-            </div>
+            <RadioGroupItem value="option3" id="simple-option3" />
+            <span>可用选项三</span>
           </RadioGroupLabel>
         </RadioGroup>
       </div>
@@ -212,22 +194,16 @@ export const WithDisabledOptions: Story = {
         <h3 className="text-sm font-medium text-muted-foreground">横向布局 - 单个选项禁用</h3>
         <RadioGroup defaultValue="option1" layout="horizontal">
           <RadioGroupLabel variant="default">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="option1" id="horizontal-simple-option1" />
-              <span>可用选项一</span>
-            </div>
+            <RadioGroupItem value="option1" id="horizontal-simple-option1" />
+            <span>可用选项一</span>
           </RadioGroupLabel>
           <RadioGroupLabel variant="default">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="option2" id="horizontal-simple-option2" disabled />
-              <span className="text-muted-foreground">禁用选项二</span>
-            </div>
+            <RadioGroupItem value="option2" id="horizontal-simple-option2" disabled />
+            <span className="text-muted-foreground">禁用选项二</span>
           </RadioGroupLabel>
           <RadioGroupLabel variant="default">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="option3" id="horizontal-simple-option3" />
-              <span>可用选项三</span>
-            </div>
+            <RadioGroupItem value="option3" id="horizontal-simple-option3" />
+            <span>可用选项三</span>
           </RadioGroupLabel>
         </RadioGroup>
       </div>

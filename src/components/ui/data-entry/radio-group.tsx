@@ -32,7 +32,7 @@ const radioGroupVariants = cva(
 );
 
 const radioGroupItemVariants = cva(
-  'aspect-square h-4 w-4 rounded-full border border-input text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-input'
+  'aspect-square h-4 w-4 rounded-full border border-input text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-input cursor-pointer hover:border-primary/70 transition-colors'
 );
 
 const radioGroupLabelVariants = cva(
@@ -40,7 +40,7 @@ const radioGroupLabelVariants = cva(
   {
     variants: {
       variant: {
-        default: 'cursor-pointer has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-70',
+        default: 'flex items-center space-x-2 cursor-pointer has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-70',
         cards: 'flex items-start gap-3 rounded-lg border p-3 cursor-pointer hover:bg-accent/50 transition-colors font-medium has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-70 has-[:disabled]:hover:bg-transparent w-full',
       },
     },

@@ -32,6 +32,12 @@ export type { DatePickerContainerProps } from './data-entry/date-picker';
 export { FileUpload } from './data-entry/file-upload';
 export { SearchInput, searchVariants } from './data-entry/search';
 export { Calendar, CalendarDayButton } from './data-entry/calendar';
+export { CitySelect } from './data-entry/city-select';
+export type { CitySelectProps, CitySelectValue } from './data-entry/city-select';
+export { Cascader } from './data-entry/cascader';
+export type { CascaderProps, CascaderOption, CascaderValue } from './data-entry/cascader';
+export { TagsInput } from './data-entry/tags-input';
+export type { TagsInputProps } from './data-entry/tags-input';
 
 // Navigation Components
 export {

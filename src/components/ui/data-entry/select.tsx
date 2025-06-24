@@ -8,7 +8,7 @@ import { Tag } from '../data-display/tags';
 
 // Select 触发器变体
 const selectTriggerVariants = cva(
-  'flex items-center justify-between gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground disabled:hover:bg-background h-9 rounded-md text-base shadow-none data-[placeholder]:text-muted-foreground [&>span]:line-clamp-1 md:text-sm w-full',
+  'group flex items-center justify-between gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>[data-radix-select-icon]_svg]:pointer-events-none [&>[data-radix-select-icon]_svg]:size-4 [&>[data-radix-select-icon]_svg]:shrink-0 border border-input bg-transparent hover:bg-accent hover:text-accent-foreground disabled:hover:bg-transparent h-9 rounded-md text-base data-[placeholder]:text-muted-foreground [&>span]:line-clamp-1 md:text-sm cursor-pointer',
   {
     variants: {
       display: {
@@ -19,10 +19,15 @@ const selectTriggerVariants = cva(
         single: '',
         multiple: 'min-h-9 h-auto py-1 px-3',
       },
+      width: {
+        auto: 'w-auto min-w-[180px]',
+        full: 'w-full',
+      },
     },
     defaultVariants: {
       display: 'text-only',
       mode: 'single',
+      width: 'full',
     },
   }
 );
@@ -60,16 +65,17 @@ interface SelectTriggerBaseProps
   extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>,
     VariantProps<typeof selectTriggerVariants> {
   icon?: React.ReactNode;
+  width?: 'auto' | 'full';
 }
 
 // 单选触发器
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
   SelectTriggerBaseProps
->(({ className, children, display = 'text-only', mode = 'single', icon, ...props }, ref) => (
+>(({ className, children, display = 'text-only', mode = 'single', width = 'full', icon, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
-    className={cn(selectTriggerVariants({ display, mode, className }))}
+    className={cn(selectTriggerVariants({ display, mode, width, className }))}
     {...props}
   >
     <div className="flex items-center gap-2 flex-1 min-w-0">
@@ -83,7 +89,7 @@ const SelectTrigger = React.forwardRef<
       </div>
     </div>
     <SelectPrimitive.Icon asChild>
-      <ChevronDown className="h-4 w-4 flex-shrink-0" />
+      <ChevronDown className="h-4 w-4 flex-shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ));
@@ -175,7 +181,7 @@ const MultiSelectTrigger = React.forwardRef<
       </div>
       
       <SelectPrimitive.Icon asChild>
-        <ChevronDown className="h-4 w-4 flex-shrink-0" />
+        <ChevronDown className="h-4 w-4 flex-shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180" />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   );
@@ -189,7 +195,7 @@ const SelectScrollUpButton = React.forwardRef<
   <SelectPrimitive.ScrollUpButton
     ref={ref}
     className={cn(
-      'flex cursor-default items-center justify-center py-1',
+      'flex cursor-pointer items-center justify-center py-1',
       className
     )}
     {...props}
@@ -206,7 +212,7 @@ const SelectScrollDownButton = React.forwardRef<
   <SelectPrimitive.ScrollDownButton
     ref={ref}
     className={cn(
-      'flex cursor-default items-center justify-center py-1',
+      'flex cursor-pointer items-center justify-center py-1',
       className
     )}
     {...props}
@@ -268,7 +274,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       className
     )}
     {...props}
@@ -299,7 +305,7 @@ const MultiSelectItem = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       selected && 'bg-accent text-accent-foreground',
       className
     )}

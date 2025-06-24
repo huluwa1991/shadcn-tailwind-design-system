@@ -4,7 +4,7 @@ import { Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const filterVariants = cva(
-  'inline-flex items-center gap-1.5 rounded-full text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer border',
+  'inline-flex items-center gap-1.5 rounded-full text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer border leading-none',
   {
     variants: {
       size: {
@@ -54,6 +54,8 @@ const FilterItem = React.forwardRef<HTMLButtonElement, FilterItemProps>(
       onSelectedChange?.(!selected);
     };
 
+    const iconSize = size === 'sm' ? 'h-3 w-3' : size === 'lg' ? 'h-4 w-4' : 'h-3.5 w-3.5';
+
     return (
       <button
         ref={ref}
@@ -70,12 +72,9 @@ const FilterItem = React.forwardRef<HTMLButtonElement, FilterItemProps>(
         aria-pressed={selected}
         {...props}
       >
-        <span>{children}</span>
+        <span className="leading-none">{children}</span>
         {selected && (
-          <Check className={cn(
-            'shrink-0',
-            size === 'sm' ? 'h-3 w-3' : size === 'lg' ? 'h-4 w-4' : 'h-3.5 w-3.5'
-          )} />
+          <Check className={cn('flex-shrink-0 leading-none', iconSize)} />
         )}
       </button>
     );

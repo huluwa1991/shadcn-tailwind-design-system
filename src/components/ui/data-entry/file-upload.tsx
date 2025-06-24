@@ -13,11 +13,13 @@ export interface FileUploadProps
   onFileSelect?: (file: File | null) => void
   disabled?: boolean
   placeholder?: string
+  size?: 'default' | 'sm' | 'lg'
 }
 
 const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
   ({ 
-    className, 
+    className,
+    size = "default",
     accept = "*/*",
     maxSize = 10 * 1024 * 1024, // 10MB default
     helperText,
@@ -124,11 +126,14 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
         <Button
           type="button"
           variant="outline"
+          size={size}
           onClick={handleButtonClick}
           disabled={disabled}
           className="gap-2 w-fit"
         >
-          <Upload className="h-4 w-4" />
+          <Upload className={cn(
+            size === "sm" ? "h-4 w-4" : "h-5 w-5"
+          )} />
           {selectedFile ? "更换文件" : placeholder}
         </Button>
         
@@ -136,9 +141,14 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
           <Tag
             variant="default"
             onRemove={handleRemoveFile}
-            className="gap-1 w-fit"
+            className={cn(
+              "gap-1 w-fit",
+              size === "sm" ? "text-sm" : "text-base"
+            )}
           >
-            <FileText className="h-3 w-3" />
+            <FileText className={cn(
+              size === "sm" ? "h-3 w-3" : "h-4 w-4"
+            )} />
             {selectedFile.name}
           </Tag>
         )}
@@ -146,20 +156,29 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
         {helperText && !selectedFile && (
           <p 
             id="file-upload-helper"
-            className="text-sm text-muted-foreground"
+            className={cn(
+              "text-muted-foreground",
+              size === "sm" ? "text-xs" : "text-sm"
+            )}
           >
             {helperText}
           </p>
         )}
 
         {error && (
-          <p className="text-sm text-destructive" role="alert">
+          <p className={cn(
+            "text-destructive",
+            size === "sm" ? "text-xs" : "text-sm"
+          )} role="alert">
             {error}
           </p>
         )}
 
         {selectedFile && !error && (
-          <p className="text-sm text-muted-foreground">
+          <p className={cn(
+            "text-muted-foreground",
+            size === "sm" ? "text-xs" : "text-sm"
+          )}>
             文件大小: {formatFileSize(selectedFile.size)}
           </p>
         )}

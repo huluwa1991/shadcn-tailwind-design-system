@@ -5,7 +5,7 @@ import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const tagVariants = cva(
-  "inline-flex items-center gap-1 rounded-sm px-2 py-0.5 text-xs font-medium transition-colors",
+  "inline-flex items-center gap-0 rounded-sm px-2 py-0.5 text-xs font-medium transition-colors",
   {
     variants: {
       variant: {
@@ -52,7 +52,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
               e.stopPropagation()
               onRemove()
             }}
-            className="ml-1 hover:bg-current/20 rounded-sm p-0.5 transition-colors"
+            className="hover:bg-current/20 rounded-sm p-0.5 transition-colors cursor-pointer"
             aria-label="Remove tag"
           >
             <X className="h-3 w-3" />

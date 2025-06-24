@@ -1,11 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { StagewiseToolbar } from '@stagewise/toolbar-react';
-import { Demo } from './components/Demo';
+import { Demo } from './components/Demo1-UserManagement';
 import './index.css';
 
 function App() {
-  return <Demo />;
+  return (
+    <div className="min-h-screen bg-background">
+      {/* 导航栏 */}
+      <div className="border-b bg-white px-6 py-4">
+        <div className="flex items-center gap-4">
+          <h1 className="text-xl font-semibold">设计系统演示</h1>
+        </div>
+      </div>
+      
+      {/* 内容区域 */}
+      <div className="p-6">
+        <Demo />
+      </div>
+    </div>
+  );
 }
 
 // 渲染主应用
