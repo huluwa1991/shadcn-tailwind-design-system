@@ -317,3 +317,25 @@ export const DisabledItems: Story = {
     </SelectContainer>
   ),
 };
+
+// 全宽度表单
+export const FullWidth: Story = {
+  parameters: {
+    layout: 'padded',
+  },
+  render: () => (
+    <SelectContainer width="full">
+      <Select>
+        <SelectTrigger>
+          <SelectValue placeholder="请选择性别" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="男">男</SelectItem>
+          <SelectItem value="女">女</SelectItem>
+          <SelectItem value="其他">其他</SelectItem>
+          <SelectItem value="不愿透露">不愿透露</SelectItem>
+        </SelectContent>
+      </Select>
+    </SelectContainer>
+  ),
+};

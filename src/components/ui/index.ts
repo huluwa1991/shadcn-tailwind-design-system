@@ -27,7 +27,8 @@ export {
 } from './data-entry/select';
 export type { SelectContainerProps, SelectTriggerBaseProps, MultiSelectTriggerProps, MultiSelectItemProps } from './data-entry/select';
 export { Switch, switchVariants } from './data-entry/switch';
-export { DatePicker, DateRangePicker } from './data-entry/date-picker';
+export { DatePicker, DateRangePicker, DatePickerContainer } from './data-entry/date-picker';
+export type { DatePickerContainerProps } from './data-entry/date-picker';
 export { FileUpload } from './data-entry/file-upload';
 export { SearchInput, searchVariants } from './data-entry/search';
 export { Calendar, CalendarDayButton } from './data-entry/calendar';

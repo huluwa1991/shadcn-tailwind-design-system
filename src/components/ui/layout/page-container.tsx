@@ -28,7 +28,7 @@ const contentVariants = cva(
     variants: {
       variant: {
         full: 'max-w-[1440px] mx-auto px-8',
-        centered: 'w-[650px] mx-auto px-6',
+        centered: 'w-[768px] max-w-[90vw] mx-auto px-6',
       },
     },
     defaultVariants: {

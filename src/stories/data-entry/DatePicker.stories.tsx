@@ -23,6 +23,15 @@ const meta = {
       control: 'text',
       description: '日期格式字符串',
     },
+    width: {
+      control: 'select',
+      options: ['auto', 'full'],
+      description: '宽度模式',
+    },
+    showDropdowns: {
+      control: 'boolean',
+      description: '是否显示月份和年份下拉选择器',
+    },
   },
 } satisfies Meta<typeof DatePicker>;
 
@@ -44,40 +53,12 @@ export const Default: Story = {
   },
   args: {
     placeholder: '请选择日期',
+    width: 'auto',
+    showDropdowns: true,
   },
 };
 
-// 单日期选择器 - 已选择状态
-export const WithSelectedDate: Story = {
-  render: (args) => {
-    const [date, setDate] = useState<Date | undefined>(new Date());
-    
-    return (
-      <DatePicker
-        {...args}
-        value={date}
-        onChange={setDate}
-      />
-    );
-  },
-  args: {
-    placeholder: '请选择日期',
-  },
-};
-
-// 单日期选择器 - 禁用状态
-export const Disabled: Story = {
-  render: () => {
-    return (
-      <DatePicker
-        disabled
-        placeholder="禁用的日期选择器"
-      />
-    );
-  },
-};
-
-// 日期范围选择器 - 默认样式
+// 日期范围选择器
 export const RangePicker: Story = {
   render: () => {
     const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
@@ -87,41 +68,82 @@ export const RangePicker: Story = {
         value={dateRange}
         onChange={setDateRange}
         placeholder="请选择日期范围"
+        width="auto"
+        showDropdowns={true}
       />
     );
   },
 };
 
-// 日期范围选择器 - 已选择状态
-export const RangePickerWithSelection: Story = {
+// 功能演示
+export const Examples: Story = {
   render: () => {
-    const [dateRange, setDateRange] = useState<DateRange | undefined>({
-      from: new Date(2024, 0, 1),
-      to: new Date(2024, 0, 15),
-    });
-    
-    return (
-      <DateRangePicker
-        value={dateRange}
-        onChange={setDateRange}
-        placeholder="请选择日期范围"
-      />
-    );
-  },
-};
-
-// 日期范围选择器 - 单月显示
-export const RangePickerSingleMonth: Story = {
-  render: () => {
+    const [date1, setDate1] = useState<Date | undefined>(undefined);
+    const [date2, setDate2] = useState<Date | undefined>(new Date());
     const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
     
     return (
-      <DateRangePicker
-        value={dateRange}
-        onChange={setDateRange}
-        placeholder="单月日期范围选择"
-        numberOfMonths={1}
-      />
+      <div className="space-y-6 w-full max-w-lg">
+        <div>
+          <h3 className="text-sm font-medium mb-2">基础单日期选择</h3>
+          <DatePicker
+            value={date1}
+            onChange={setDate1}
+            placeholder="选择日期"
+            width="auto"
+          />
+        </div>
+        
+        <div>
+          <h3 className="text-sm font-medium mb-2">已选择状态</h3>
+          <DatePicker
+            value={date2}
+            onChange={setDate2}
+            placeholder="选择日期"
+            width="auto"
+          />
+        </div>
+        
+        <div>
+          <h3 className="text-sm font-medium mb-2">禁用状态</h3>
+          <DatePicker
+            disabled
+            placeholder="禁用的日期选择器"
+            width="auto"
+          />
+        </div>
+        
+        <div>
+          <h3 className="text-sm font-medium mb-2">全宽模式</h3>
+          <DatePicker
+            value={date1}
+            onChange={setDate1}
+            placeholder="全宽显示"
+            width="full"
+          />
+        </div>
+        
+        <div>
+          <h3 className="text-sm font-medium mb-2">日期范围选择</h3>
+          <DateRangePicker
+            value={dateRange}
+            onChange={setDateRange}
+            placeholder="选择日期范围"
+            width="auto"
+          />
+        </div>
+        
+        <div>
+          <h3 className="text-sm font-medium mb-2">隐藏下拉选择器</h3>
+          <DatePicker
+            value={date1}
+            onChange={setDate1}
+            placeholder="传统导航模式"
+            showDropdowns={false}
+            width="auto"
+          />
+        </div>
+      </div>
     );
   },
 };
