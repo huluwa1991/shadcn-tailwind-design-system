@@ -8,13 +8,7 @@ const meta = {
   component: Sidebar,
   parameters: {
     layout: 'fullscreen',
-    docs: {
-      description: {
-        component: 'Sidebar 是一个完整的侧边栏组件，包含头部 Logo、导航菜单、工具菜单和用户信息等功能区域。支持收起/展开功能，收起状态下 Logo 位置会显示展开按钮，主要用于应用程序的主导航界面。',
-      },
-    },
   },
-  tags: ['autodocs'],
   argTypes: {
     collapsed: {
       control: 'boolean',

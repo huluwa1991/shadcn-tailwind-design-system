@@ -544,7 +544,7 @@ export const Resume: React.FC = () => {
 
 
   return (
-    <div className="flex h-screen w-full bg-sidebar">
+    <div className="flex h-screen w-full">
       {/* 侧边栏区域 */}
       <div>
         <Sidebar 
@@ -554,8 +554,7 @@ export const Resume: React.FC = () => {
       </div>
       
       {/* 主内容区域 */}
-      <div className="flex-1 p-2">
-        <PageContainer variant="centered">
+      <PageContainer variant="centered">
           {/* 页面头部 */}
           <PageHeaderWrapper
             variant="title-with-actions"
@@ -1591,7 +1590,6 @@ export const Resume: React.FC = () => {
             </div>
           </div>
         </PageContainer>
-      </div>
 
       {/* 上传简历对话框 */}
       {showUploadDialog && (
@@ -1625,4 +1623,6 @@ export const Resume: React.FC = () => {
       )}
     </div>
   );
-}; 
+};
+
+export default Resume; 

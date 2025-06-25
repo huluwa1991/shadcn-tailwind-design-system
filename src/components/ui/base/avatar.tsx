@@ -23,7 +23,7 @@ const avatarImageVariants = cva(
 );
 
 const avatarFallbackVariants = cva(
-  'flex h-full w-full items-center justify-center rounded-full bg-muted text-sm font-medium',
+  'flex h-full w-full items-center justify-center rounded-full bg-sidebar-accent text-sidebar-accent-foreground text-sm font-medium',
   {
     variants: {
       size: {

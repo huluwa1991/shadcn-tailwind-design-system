@@ -32,8 +32,8 @@ const ContentAreaMarker = ({
   variant?: 'full' | 'centered';
   height?: string;
 }) => {
-  const widthText = variant === 'full' ? '最大宽度: 1440px, 左右内边距: 32px' : '宽度: 650px, 左右内边距: 24px';
-  const containerClass = variant === 'full' ? 'max-w-full' : 'max-w-[650px] mx-auto';
+  const widthText = variant === 'full' ? '最大宽度: 1440px, 左右内边距: 32px' : '宽度: 768px, 左右内边距: 24px';
+  const containerClass = variant === 'full' ? 'max-w-full' : 'max-w-[768px] mx-auto';
   
   return (
     <div className={`${height} w-full bg-blue-50 border-2 border-dashed border-blue-300 rounded-lg flex items-center justify-center ${containerClass}`}>
@@ -41,6 +41,7 @@ const ContentAreaMarker = ({
         页面容器内容区域<br/>
         {widthText}<br/>
         上下内边距: 40px<br/>
+        默认包含背景色(bg-sidebar)和外边距(p-2)<br/>
         圆角、边框、阴影已配置
       </Typography>
     </div>
@@ -61,7 +62,21 @@ export const Centered: Story = {
   parameters: {
     docs: {
       description: {
-        story: '居中布局变体，固定宽度650px，适合表单或文档类内容',
+        story: '居中布局变体，固定宽度768px，适合表单或文档类内容。所有PageContainer现在都自动包含背景色和边距。',
+      },
+    },
+  },
+};
+
+export const FullWidth: Story = {
+  args: {
+    variant: 'full',
+    children: <ContentAreaMarker variant="full" height="h-96" />,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: '全宽布局，现在所有PageContainer都自动包含背景色和边距。适合需要更多展示空间的页面内容。',
       },
     },
   },

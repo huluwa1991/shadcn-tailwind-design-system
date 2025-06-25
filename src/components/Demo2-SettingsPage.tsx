@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { 
-  Sidebar,
+  TopNav,
   PageContainer,
   PageHeaderWrapper,
   Typography,
@@ -176,7 +176,6 @@ const settingsGroups: SettingsGroup[] = [
 ];
 
 export const Demo2: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
   const [settings, setSettings] = useState<Record<string, any>>(() => {
     // 初始化设置状态
     const initialSettings: Record<string, any> = {};
@@ -237,19 +236,34 @@ export const Demo2: React.FC = () => {
     setSettings(defaultSettings);
   };
 
+  // 导航栏事件处理
+  const handleHelpClick = () => {
+    console.log('帮助按钮点击');
+  };
+
+  const handleAvatarClick = () => {
+    console.log('头像点击');
+  };
+
+  const handleLogoClick = () => {
+    console.log('Logo点击');
+  };
+
   return (
-    <div className="flex h-screen w-full bg-sidebar">
-      {/* 侧边栏区域 */}
-      <div>
-        <Sidebar 
-          collapsed={collapsed}
-          onCollapsedChange={setCollapsed}
-        />
-      </div>
+    <div className="flex flex-col h-screen w-full">
+      {/* 顶部导航栏 */}
+      <TopNav
+        isLoggedIn={true}
+        userName="shadcn"
+        avatarFallback="CN"
+        onHelpClick={handleHelpClick}
+        onAvatarClick={handleAvatarClick}
+        onLogoClick={handleLogoClick}
+      />
       
       {/* 主内容区域 */}
-      <div className="flex-1 p-2">
-        <PageContainer variant="centered">
+      <div className="flex-1 overflow-auto">
+        <PageContainer variant="centered" padding="nav-layout">
           {/* 页面头部 */}
           <PageHeaderWrapper
             variant="title-with-actions"
@@ -404,4 +418,6 @@ export const Demo2: React.FC = () => {
       </div>
     </div>
   );
-}; 
+};
+
+export default Demo2; 

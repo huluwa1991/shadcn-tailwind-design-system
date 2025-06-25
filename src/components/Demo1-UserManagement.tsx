@@ -149,7 +149,7 @@ export const Demo: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen w-full bg-sidebar">
+    <div className="flex h-screen w-full">
       {/* 侧边栏区域 */}
       <div>
         <Sidebar 
@@ -159,8 +159,7 @@ export const Demo: React.FC = () => {
       </div>
       
       {/* 主内容区域 */}
-      <div className="flex-1 p-2">
-        <PageContainer variant="full">
+      <PageContainer variant="full">
           {/* 页面头部 */}
           <PageHeaderWrapper
             variant="title-with-toolbar"
@@ -282,7 +281,6 @@ export const Demo: React.FC = () => {
             </Table>
           </TableWrapper>
         </PageContainer>
-      </div>
     </div>
   );
 };

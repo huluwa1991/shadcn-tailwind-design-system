@@ -71,6 +71,7 @@ export {
   PaginationPrevious,
 } from './navigation/pagination';
 export { Command } from './navigation/command';
+export { TopNav, topNavVariants } from './navigation/top-nav';
 
 // Feedback Components
 export { Alert, AlertTitle, AlertDescription } from './feedback/alert';
@@ -79,6 +80,8 @@ export { Dialog } from './feedback/dialog';
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './feedback/tooltip';
 export { Popconfirm } from './feedback/popconfirm';
 export { Popover } from './feedback/popover';
+export { Loading, loadingVariants } from './feedback/loading';
+export { Skeleton } from './feedback/skeleton';
 
 // Data Display Components
 export { 
@@ -110,7 +113,7 @@ export { FilterItem, FilterGroup, filterVariants, filterGroupVariants } from './
 export type { FilterOption, FilterItemProps, FilterGroupProps } from './data-display/filter';
 
 // Layout Components
-export { PageContainer, pageContainerVariants, contentVariants } from './layout/page-container';
+export { PageContainer, pageContainerVariants, containerVariants, contentVariants } from './layout/page-container';
 export { 
   PageHeader,
   PageHeaderHeader,
