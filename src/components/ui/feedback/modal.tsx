@@ -8,7 +8,7 @@ import { Typography } from '../base/typography';
 import { Button } from '../base/button';
 
 const modalVariants = cva(
-  'fixed left-[50%] top-[50%] z-50 grid w-full translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom sm:rounded-lg',
+  'fixed left-[50%] top-[50%] z-50 grid w-full translate-x-[-50%] translate-y-[-50%] gap-3 rounded-lg border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom sm:rounded-lg',
   {
     variants: {
       size: {
@@ -64,7 +64,7 @@ const ModalContent = React.forwardRef<
         </DialogPrimitive.Close>
       </div>
 
-      <div className="py-2">{children}</div>
+      <div className="pb-2">{children}</div>
 
       {footer && <div className="flex justify-end gap-2">{footer}</div>}
     </DialogPrimitive.Content>

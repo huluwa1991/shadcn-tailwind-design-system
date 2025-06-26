@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { StagewiseToolbar } from '@stagewise/toolbar-react';
 import { Demo } from './components/Demo1-UserManagement';
+import { Toaster } from './components/ui/feedback/toast';
 import './index.css';
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
       <div className="p-6">
         <Demo />
       </div>
+      
+      {/* Toast 组件 */}
+      <Toaster />
     </div>
   );
 }

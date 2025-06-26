@@ -8,7 +8,7 @@ import { Tag } from '../data-display/tags';
 
 // Select 触发器变体
 const selectTriggerVariants = cva(
-  'group flex items-center justify-between gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>[data-radix-select-icon]_svg]:pointer-events-none [&>[data-radix-select-icon]_svg]:size-4 [&>[data-radix-select-icon]_svg]:shrink-0 border border-input bg-transparent hover:bg-accent hover:text-accent-foreground disabled:hover:bg-transparent h-9 rounded-md text-base data-[placeholder]:text-muted-foreground [&>span]:line-clamp-1 md:text-sm cursor-pointer',
+  'group flex items-center justify-between gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted [&>[data-radix-select-icon]_svg]:pointer-events-none [&>[data-radix-select-icon]_svg]:size-4 [&>[data-radix-select-icon]_svg]:shrink-0 border border-input bg-transparent hover:bg-accent hover:text-accent-foreground disabled:hover:bg-transparent h-9 rounded-md text-sm data-[placeholder]:text-muted-foreground [&>span]:line-clamp-1 cursor-pointer',
   {
     variants: {
       display: {

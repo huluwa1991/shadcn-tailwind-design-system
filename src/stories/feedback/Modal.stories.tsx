@@ -47,7 +47,7 @@ type Story = StoryObj<typeof meta>;
 const ContentAreaMarker = ({ height = 'h-24' }: { height?: string }) => (
   <div className={`${height} w-full bg-purple-100 border-2 border-dashed border-purple-300 rounded-lg flex items-center justify-center`}>
               <Typography variant="body" className="text-purple-600">
-      内容区域 (上下24px，左右24px)
+      内容区域
     </Typography>
   </div>
 );

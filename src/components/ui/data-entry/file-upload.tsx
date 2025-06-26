@@ -13,13 +13,13 @@ export interface FileUploadProps
   onFileSelect?: (file: File | null) => void
   disabled?: boolean
   placeholder?: string
-  size?: 'default' | 'sm' | 'lg'
+  variant?: 'button' | 'dropzone'
 }
 
 const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
   ({ 
     className,
-    size = "default",
+    variant = "button",
     accept = "*/*",
     maxSize = 10 * 1024 * 1024, // 10MB default
     helperText,
@@ -30,6 +30,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
   }, ref) => {
     const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
     const [error, setError] = React.useState<string>("")
+    const [isDragOver, setIsDragOver] = React.useState<boolean>(false)
     const fileInputRef = React.useRef<HTMLInputElement>(null)
 
     const formatFileSize = (bytes: number): string => {
@@ -38,6 +39,25 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
       const sizes = ['Bytes', 'KB', 'MB', 'GB']
       const i = Math.floor(Math.log(bytes) / Math.log(k))
       return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+    }
+
+    const getDropzoneHelpText = (): string => {
+      const parts: string[] = []
+      
+      if (accept !== "*/*") {
+        const acceptedFormats = accept.split(',').map(type => type.trim())
+        if (acceptedFormats.length <= 3) {
+          parts.push(`支持 ${acceptedFormats.join('、')} 格式`)
+        } else {
+          parts.push('支持多种格式')
+        }
+      }
+      
+      if (maxSize < 50 * 1024 * 1024) { // 小于50MB才显示大小限制
+        parts.push(`大小不超过 ${formatFileSize(maxSize)}`)
+      }
+      
+      return parts.length > 0 ? parts.join('，') : '拖拽文件到此处或点击上传'
     }
 
     const validateFile = (file: File): string | null => {
@@ -71,8 +91,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
       return null
     }
 
-    const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0] || null
+    const processFile = (file: File | null) => {
       setError("")
 
       if (file) {
@@ -93,6 +112,11 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
       onFileSelect?.(file)
     }
 
+    const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0] || null
+      processFile(file)
+    }
+
     const handleRemoveFile = () => {
       setSelectedFile(null)
       setError("")
@@ -105,6 +129,112 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 
     const handleButtonClick = () => {
       fileInputRef.current?.click()
+    }
+
+    const handleDragOver = (event: React.DragEvent) => {
+      event.preventDefault()
+      if (!disabled) {
+        setIsDragOver(true)
+      }
+    }
+
+    const handleDragLeave = (event: React.DragEvent) => {
+      event.preventDefault()
+      setIsDragOver(false)
+    }
+
+    const handleDrop = (event: React.DragEvent) => {
+      event.preventDefault()
+      setIsDragOver(false)
+      
+      if (disabled) return
+
+      const files = event.dataTransfer.files
+      if (files.length > 0) {
+        processFile(files[0])
+      }
+    }
+
+    const handleDropzoneClick = () => {
+      if (!disabled) {
+        fileInputRef.current?.click()
+      }
+    }
+
+    if (variant === "dropzone") {
+      return (
+        <div
+          ref={ref}
+          className={cn("flex flex-col gap-2 w-full", className)}
+          {...props}
+        >
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept={accept}
+            onChange={handleFileSelect}
+            disabled={disabled}
+            className="hidden"
+            aria-describedby={helperText ? "file-upload-helper" : undefined}
+          />
+          
+          <div
+            onClick={handleDropzoneClick}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            className={cn(
+              "flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer transition-colors",
+              "hover:bg-muted/50",
+              isDragOver && "border-primary bg-primary/5",
+              !isDragOver && "border-muted-foreground/25",
+              disabled && "cursor-not-allowed opacity-50 bg-muted hover:bg-muted",
+              selectedFile && "border-primary/50 bg-primary/5"
+            )}
+          >
+                         <div className="flex flex-col items-center justify-center gap-2">
+               <Upload className={cn(
+                 "h-8 w-8 text-muted-foreground",
+                 isDragOver && "text-primary",
+                 selectedFile && "text-primary"
+               )} />
+               <div className="text-center">
+                 <p className={cn(
+                   "font-medium text-sm",
+                   isDragOver && "text-primary",
+                   selectedFile && "text-primary"
+                 )}>
+                   {selectedFile ? selectedFile.name : (isDragOver ? "松开鼠标上传文件" : placeholder)}
+                 </p>
+                 {!selectedFile && (
+                   <p className="text-sm text-muted-foreground">
+                     {getDropzoneHelpText()}
+                   </p>
+                 )}
+               </div>
+             </div>
+          </div>
+
+                     {selectedFile && (
+             <Tag
+               variant="default"
+               onRemove={handleRemoveFile}
+               className="gap-1 w-fit text-sm"
+             >
+               <FileText className="h-4 w-4" />
+               {selectedFile.name} ({formatFileSize(selectedFile.size)})
+             </Tag>
+           )}
+
+
+
+           {error && (
+             <p className="text-sm text-destructive" role="alert">
+               {error}
+             </p>
+           )}
+        </div>
+      )
     }
 
     return (
@@ -126,14 +256,11 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
         <Button
           type="button"
           variant="outline"
-          size={size}
           onClick={handleButtonClick}
           disabled={disabled}
-          className="gap-2 w-fit"
+          className="gap-2 w-fit h-9"
         >
-          <Upload className={cn(
-            size === "sm" ? "h-4 w-4" : "h-5 w-5"
-          )} />
+          <Upload className="h-5 w-5" />
           {selectedFile ? "更换文件" : placeholder}
         </Button>
         
@@ -141,14 +268,9 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
           <Tag
             variant="default"
             onRemove={handleRemoveFile}
-            className={cn(
-              "gap-1 w-fit",
-              size === "sm" ? "text-sm" : "text-base"
-            )}
+            className="gap-1 w-fit text-sm"
           >
-            <FileText className={cn(
-              size === "sm" ? "h-3 w-3" : "h-4 w-4"
-            )} />
+            <FileText className="h-4 w-4" />
             {selectedFile.name}
           </Tag>
         )}
@@ -156,29 +278,20 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
         {helperText && !selectedFile && (
           <p 
             id="file-upload-helper"
-            className={cn(
-              "text-muted-foreground",
-              size === "sm" ? "text-xs" : "text-sm"
-            )}
+            className="text-sm text-muted-foreground"
           >
             {helperText}
           </p>
         )}
 
         {error && (
-          <p className={cn(
-            "text-destructive",
-            size === "sm" ? "text-xs" : "text-sm"
-          )} role="alert">
+          <p className="text-sm text-destructive" role="alert">
             {error}
           </p>
         )}
 
         {selectedFile && !error && (
-          <p className={cn(
-            "text-muted-foreground",
-            size === "sm" ? "text-xs" : "text-sm"
-          )}>
+          <p className="text-sm text-muted-foreground">
             文件大小: {formatFileSize(selectedFile.size)}
           </p>
         )}

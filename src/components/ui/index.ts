@@ -4,6 +4,28 @@ export { Label } from './base/label';
 export { Avatar, AvatarUserInfo, AvatarWithInfo, avatarVariants } from './base/avatar';
 export { Badge, badgeVariants } from './base/badge';
 export { Typography, typographyVariants } from './base/typography';
+export { ButtonGroup } from './base/button-group';
+export { ColorPalette } from './base/color-palette';
+export {
+  Dropdown,
+  DropdownAnchor,
+  DropdownContainer,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownLabel,
+  dropdownVariants,
+  dropdownTriggerVariants,
+  dropdownContentVariants,
+  dropdownItemVariants,
+} from './base/dropdown';
+export type {
+  DropdownContainerProps,
+  DropdownTriggerProps,
+  DropdownContentProps,
+  DropdownItemProps,
+} from './base/dropdown';
 
 // Data Entry Components
 export { Input } from './data-entry/input';
@@ -28,8 +50,7 @@ export {
 } from './data-entry/select';
 export type { SelectContainerProps, SelectTriggerBaseProps, MultiSelectTriggerProps, MultiSelectItemProps } from './data-entry/select';
 export { Switch, switchVariants } from './data-entry/switch';
-export { DatePicker, DateRangePicker, DatePickerContainer } from './data-entry/date-picker';
-export type { DatePickerContainerProps } from './data-entry/date-picker';
+export { DatePicker, DateRangePicker } from './data-entry/date-picker';
 export { FileUpload } from './data-entry/file-upload';
 export { SearchInput, searchVariants } from './data-entry/search';
 export { Calendar, CalendarDayButton } from './data-entry/calendar';
@@ -76,12 +97,30 @@ export { TopNav, topNavVariants } from './navigation/top-nav';
 // Feedback Components
 export { Alert, AlertTitle, AlertDescription } from './feedback/alert';
 export { Modal } from './feedback/modal';
-export { Dialog } from './feedback/dialog';
+export { 
+  Dialog, 
+  DialogContent, 
+  DialogTrigger, 
+  DialogTitle, 
+  DialogDescription,
+  DialogHeader,
+  DialogFooter,
+  DialogClose
+} from './feedback/dialog';
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './feedback/tooltip';
 export { Popconfirm } from './feedback/popconfirm';
 export { Popover } from './feedback/popover';
+export {
+  CascaderDropdown,
+  CascaderColumn,
+  cascaderDropdownVariants,
+  cascaderColumnVariants,
+} from './feedback/cascader-dropdown';
+export type { CascaderDropdownProps } from './feedback/cascader-dropdown';
 export { Loading, loadingVariants } from './feedback/loading';
 export { Skeleton } from './feedback/skeleton';
+export { Toaster, toast } from './feedback/toast';
+export type { ToastOptions } from './feedback/toast';
 
 // Data Display Components
 export { 

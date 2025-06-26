@@ -128,7 +128,7 @@ const TagsInput = React.forwardRef<HTMLDivElement, TagsInputProps>(
       <div
         ref={ref}
         className={cn(
-          "flex min-h-9 w-full flex-wrap gap-1 rounded-md border border-input bg-transparent px-3 py-1 text-base transition-colors placeholder:text-muted-foreground focus-within:ring-1 focus-within:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+          "flex min-h-9 w-full flex-wrap gap-1 rounded-md border border-input bg-transparent px-3 py-1 text-sm transition-colors placeholder:text-muted-foreground focus-within:ring-1 focus-within:ring-ring disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted",
           className
         )}
         onClick={handleContainerClick}

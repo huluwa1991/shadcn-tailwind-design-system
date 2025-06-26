@@ -7,32 +7,13 @@ import { cn } from "@/lib/utils"
 import { Button } from "../base/button"
 import { Calendar } from "./calendar"
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "../feedback/popover"
+  Dropdown,
+  DropdownContainer,
+  DropdownTrigger,
+  DropdownContent,
+} from "../base/dropdown"
 
-// DatePicker 容器组件 - 支持不同宽度模式
-interface DatePickerContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  width?: 'auto' | 'full';
-}
 
-const DatePickerContainer = React.forwardRef<HTMLDivElement, DatePickerContainerProps>(
-  ({ className, children, width = 'auto', ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        width === 'auto' ? "w-auto" : "w-full",
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </div>
-  )
-);
-DatePickerContainer.displayName = 'DatePickerContainer';
 
 // 单日期选择器接口
 export interface DatePickerProps
@@ -78,7 +59,7 @@ const DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(
     const [open, setOpen] = React.useState(false)
 
     const getWidthClasses = () => {
-      const baseClasses = "flex h-9 items-center justify-start gap-2 rounded-md border border-input bg-transparent px-3 text-base transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm cursor-pointer"
+      const baseClasses = "flex h-9 items-center justify-start gap-2 rounded-md border border-input bg-transparent px-3 text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted cursor-pointer"
       const widthClasses = width === 'auto' ? "w-auto" : "w-full"
       const minWidthStyle = width === 'auto' ? { minWidth } : {}
       
@@ -91,35 +72,40 @@ const DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(
     const { className: buttonClassName, style } = getWidthClasses()
 
     return (
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <button
-            ref={ref}
-            type="button"
-            className={buttonClassName}
-            style={style}
-            disabled={disabled}
-            {...props}
+      <DropdownContainer width={width}>
+        <Dropdown open={open} onOpenChange={setOpen}>
+          <DropdownTrigger
+            asChild
+            width={width}
           >
-            <CalendarIcon className="h-4 w-4 flex-shrink-0" />
-            <span className="flex-1 truncate text-left">
-              {value ? format(value, formatStr) : placeholder}
-            </span>
-          </button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0 overflow-hidden" align="start" data-slot="popover-content">
-          <Calendar
-            mode="single"
-            selected={value}
-            onSelect={(date) => {
-              onChange?.(date)
-              setOpen(false)
-            }}
-            initialFocus
-            captionLayout={showDropdowns ? "dropdown" : "label"}
-          />
-        </PopoverContent>
-      </Popover>
+            <button
+              ref={ref}
+              type="button"
+              className={buttonClassName}
+              style={style}
+              disabled={disabled}
+              {...props}
+            >
+              <CalendarIcon className="h-4 w-4 flex-shrink-0" />
+              <span className="flex-1 truncate text-left">
+                {value ? format(value, formatStr) : placeholder}
+              </span>
+            </button>
+          </DropdownTrigger>
+          <DropdownContent className="w-auto p-0 overflow-hidden" size="auto" align="start">
+            <Calendar
+              mode="single"
+              selected={value}
+              onSelect={(date) => {
+                onChange?.(date)
+                setOpen(false)
+              }}
+              initialFocus
+              captionLayout={showDropdowns ? "dropdown" : "label"}
+            />
+          </DropdownContent>
+        </Dropdown>
+      </DropdownContainer>
     )
   }
 )
@@ -149,7 +135,7 @@ const DateRangePicker = React.forwardRef<HTMLButtonElement, DateRangePickerProps
     }
 
     const getWidthClasses = () => {
-      const baseClasses = "flex h-9 items-center justify-start gap-2 rounded-md border border-input bg-transparent px-3 text-base transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm cursor-pointer"
+      const baseClasses = "flex h-9 items-center justify-start gap-2 rounded-md border border-input bg-transparent px-3 text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted cursor-pointer"
       const widthClasses = width === 'auto' ? "w-auto" : "w-full"
       const minWidthStyle = width === 'auto' ? { minWidth } : {}
       
@@ -162,37 +148,41 @@ const DateRangePicker = React.forwardRef<HTMLButtonElement, DateRangePickerProps
     const { className: buttonClassName, style } = getWidthClasses()
 
     return (
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <button
-            ref={ref}
-            type="button"
-            className={buttonClassName}
-            style={style}
-            disabled={disabled}
-            {...props}
+      <DropdownContainer width={width}>
+        <Dropdown open={open} onOpenChange={setOpen}>
+          <DropdownTrigger
+            asChild
+            width={width}
           >
-            <CalendarIcon className="h-4 w-4 flex-shrink-0" />
-            <span className="flex-1 truncate text-left">
-              {formatRange(value)}
-            </span>
-          </button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0 overflow-hidden" align="start" data-slot="popover-content">
-          <Calendar
-            mode="range"
-            selected={value}
-            onSelect={onChange}
-            numberOfMonths={numberOfMonths}
-            initialFocus
-            captionLayout={showDropdowns ? "dropdown" : "label"}
-          />
-        </PopoverContent>
-      </Popover>
+            <button
+              ref={ref}
+              type="button"
+              className={buttonClassName}
+              style={style}
+              disabled={disabled}
+              {...props}
+            >
+              <CalendarIcon className="h-4 w-4 flex-shrink-0" />
+              <span className="flex-1 truncate text-left">
+                {formatRange(value)}
+              </span>
+            </button>
+          </DropdownTrigger>
+          <DropdownContent className="w-auto p-0 overflow-hidden" size="auto" align="start">
+            <Calendar
+              mode="range"
+              selected={value}
+              onSelect={onChange}
+              numberOfMonths={numberOfMonths}
+              initialFocus
+              captionLayout={showDropdowns ? "dropdown" : "label"}
+            />
+          </DropdownContent>
+        </Dropdown>
+      </DropdownContainer>
     )
   }
 )
 DateRangePicker.displayName = "DateRangePicker"
 
-export { DatePicker, DateRangePicker, DatePickerContainer }
-export type { DatePickerContainerProps } 
+export { DatePicker, DateRangePicker } 

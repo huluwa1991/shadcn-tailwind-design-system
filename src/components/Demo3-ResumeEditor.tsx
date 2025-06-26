@@ -20,9 +20,11 @@ import {
   CitySelect,
   type CitySelectValue,
   Alert,
-  AlertDescription
+  AlertDescription,
+  Popconfirm,
+  Modal
 } from './ui';
-import { Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2, CheckCircle, Upload } from 'lucide-react';
 
 // 数据类型定义
 interface BasicInfo {
@@ -33,6 +35,8 @@ interface BasicInfo {
   hometown: string;
   email: string;
   expectedSalary: string;
+  isNameVerified: boolean;
+  isPhoneVerified: boolean;
 }
 
 interface WorkExperience {
@@ -131,13 +135,15 @@ interface ResumeData {
 // 初始化数据
 const initialResumeData: ResumeData = {
   basicInfo: {
-    name: '',
-    phone: '',
+    name: '张三',
+    phone: '138****8888',
     city: {},
     gender: '',
     hometown: '',
     email: '',
-    expectedSalary: ''
+    expectedSalary: '',
+    isNameVerified: true,
+    isPhoneVerified: true
   },
   workExperiences: [],
   projectExperiences: [],
@@ -162,7 +168,6 @@ const initialResumeData: ResumeData = {
 export const Resume: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [resumeData, setResumeData] = useState<ResumeData>(initialResumeData);
-  const [isEditable] = useState(true);
   const [showUploadDialog, setShowUploadDialog] = useState(false);
   const [showPrivacyAlert, setShowPrivacyAlert] = useState(true);
 
@@ -463,6 +468,113 @@ export const Resume: React.FC = () => {
     }
   };
 
+  const handleConfirmUpload = () => {
+    setShowUploadDialog(true);
+  };
+
+  // 检查工作经历是否有内容
+  const hasWorkExperienceContent = (experience: WorkExperience) => {
+    const hasContent = !!(experience.organization || experience.title || experience.department || 
+           experience.type || experience.achievements.length > 0 || 
+           experience.startDate || experience.endDate ||
+           (experience.city && (experience.city.province || experience.city.city)));
+    console.log('hasWorkExperienceContent:', {
+      experience,
+      hasContent,
+      organization: experience.organization,
+      title: experience.title,
+      department: experience.department,
+      type: experience.type
+    });
+    return hasContent;
+  };
+
+  // 检查项目经历是否有内容
+  const hasProjectExperienceContent = (project: ProjectExperience) => {
+    return !!(project.organization || project.role || project.startDate || 
+           project.endDate || project.achievements.length > 0);
+  };
+
+  // 检查教育经历是否有内容
+  const hasEducationContent = (education: Education) => {
+    return !!(education.school || education.faculty || education.degree || 
+           education.status || education.startDate || education.endDate ||
+           education.achievements.length > 0 ||
+           (education.city && (education.city.province || education.city.city)));
+  };
+
+  // 检查奖励是否有内容
+  const hasAwardContent = (award: Award) => {
+    return !!(award.name || award.issuer || award.date);
+  };
+
+  // 检查论文是否有内容
+  const hasPaperContent = (paper: Paper) => {
+    return !!(paper.title || paper.journal || paper.link || paper.authorRank > 1);
+  };
+
+  // 检查代码仓库是否有内容
+  const hasRepositoryContent = (repository: Repository) => {
+    return !!(repository.type || repository.url);
+  };
+
+  // 检查专利是否有内容
+  const hasPatentContent = (patent: Patent) => {
+    return !!(patent.name || patent.number);
+  };
+
+  // 检查社交媒体是否有内容
+  const hasSocialMediaContent = (social: SocialMedia) => {
+    return !!(social.platform || social.account || social.link);
+  };
+
+  // 通用删除按钮组件
+  const DeleteButton: React.FC<{
+    hasContent: boolean;
+    onDelete: () => void;
+    itemIndex: number;
+  }> = ({ hasContent, onDelete, itemIndex }) => {
+    console.log(`DeleteButton - hasContent: ${hasContent}, itemIndex: ${itemIndex}`);
+    
+    // 用于跟踪Popconfirm的开启状态
+    const [popconfirmOpen, setPopconfirmOpen] = useState(false);
+
+    if (hasContent) {
+      return (
+        <Popconfirm
+          description="确认删除本条吗？"
+          onConfirm={onDelete}
+          confirmText="删除"
+          cancelText="取消"
+          onOpenChange={setPopconfirmOpen}
+        >
+          <Button
+            variant="ghost"
+            size="sm-icon"
+            className={`text-red-600 hover:text-red-700 hover:bg-red-50 transition-opacity ${
+              popconfirmOpen ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+            }`}
+            tooltip="删除本条记录"
+          >
+            <Trash2 className="h-4 w-4" />
+          </Button>
+        </Popconfirm>
+      );
+    }
+
+    return (
+      <Button
+        variant="ghost"
+        size="sm-icon"
+        onClick={onDelete}
+        className="text-red-600 hover:text-red-700 hover:bg-red-50 opacity-0 group-hover:opacity-100 transition-opacity"
+        tooltip="删除本条记录"
+      >
+        <Trash2 className="h-4 w-4" />
+      </Button>
+    );
+  };
+
   // 年月选择组件
   const YearMonthSelector: React.FC<{
     value: string; // 格式: "2025-05"
@@ -561,12 +673,20 @@ export const Resume: React.FC = () => {
             title="我的简历"
             actions={
               <div className="flex gap-2">
-                <FileUpload
-                  onFileSelect={handleUploadResume}
-                  accept=".pdf"
-                  maxSize={10 * 1024 * 1024} // 10MB
-                  placeholder="上传简历识别"
-                />
+                <Popconfirm
+                  description="新简历将会覆盖当前所有内容，继续吗？"
+                  onConfirm={handleConfirmUpload}
+                  confirmText="继续上传"
+                  cancelText="取消"
+                >
+                  <Button 
+                    variant="outline" 
+                    className="flex items-center gap-2"
+                  >
+                    <Upload className="h-4 w-4" />
+                    上传新简历
+                  </Button>
+                </Popconfirm>
                 <Button onClick={handleSave}>
                   保存
                 </Button>
@@ -608,12 +728,15 @@ export const Resume: React.FC = () => {
                         value={resumeData.basicInfo.name}
                         onChange={(e) => updateBasicInfo('name', e.target.value)}
                         placeholder="请输入姓名"
-                        disabled={!isEditable} // 已实名认证的不可编辑
+                        disabled={resumeData.basicInfo.isNameVerified} // 已实名认证的不可编辑
                       />
-                      {!isEditable && (
-                        <Typography variant="muted" className="text-xs">
-                          已实名认证，不可修改
-                        </Typography>
+                      {resumeData.basicInfo.isNameVerified && (
+                        <div className="flex items-center gap-1">
+                          <CheckCircle className="h-3 w-3 text-muted-foreground" />
+                          <Typography variant="muted" className="text-xs text-muted-foreground">
+                            已实名认证，不可修改
+                          </Typography>
+                        </div>
                       )}
                     </div>
                     
@@ -646,12 +769,15 @@ export const Resume: React.FC = () => {
                         value={resumeData.basicInfo.phone}
                         onChange={(e) => updateBasicInfo('phone', e.target.value)}
                         placeholder="请输入电话号码"
-                        disabled={!isEditable} // 已验证的不可编辑
+                        disabled={resumeData.basicInfo.isPhoneVerified} // 已验证的不可编辑
                       />
-                      {!isEditable && (
-                        <Typography variant="muted" className="text-xs">
-                          已验证，不可修改
-                        </Typography>
+                      {resumeData.basicInfo.isPhoneVerified && (
+                        <div className="flex items-center gap-1">
+                          <CheckCircle className="h-3 w-3 text-muted-foreground" />
+                          <Typography variant="muted" className="text-xs text-muted-foreground">
+                            已验证，不可修改
+                          </Typography>
+                        </div>
                       )}
                     </div>
                     
@@ -729,19 +855,15 @@ export const Resume: React.FC = () => {
               
               <div className="space-y-6">
                 {resumeData.workExperiences.map((experience, index) => (
-                  <BlockLayout key={experience.id}>
+                  <BlockLayout key={experience.id} className="group">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <Typography variant="h3">工作经历 {index + 1}</Typography>
-                        <Button
-                          variant="ghost"
-                          size="sm-icon"
-                          onClick={() => removeWorkExperience(experience.id)}
-                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                          tooltip="删除工作经历"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
+                        <DeleteButton
+                          hasContent={hasWorkExperienceContent(experience)}
+                          onDelete={() => removeWorkExperience(experience.id)}
+                          itemIndex={index}
+                        />
                       </div>
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -863,19 +985,15 @@ export const Resume: React.FC = () => {
               
               <div className="space-y-6">
                 {resumeData.projectExperiences.map((project, index) => (
-                  <BlockLayout key={project.id}>
+                  <BlockLayout key={project.id} className="group">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <Typography variant="h3">项目经历 {index + 1}</Typography>
-                        <Button
-                          variant="ghost"
-                          size="sm-icon"
-                          onClick={() => removeProjectExperience(project.id)}
-                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                          tooltip="删除项目经历"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
+                        <DeleteButton
+                          hasContent={hasProjectExperienceContent(project)}
+                          onDelete={() => removeProjectExperience(project.id)}
+                          itemIndex={index}
+                        />
                       </div>
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -955,19 +1073,15 @@ export const Resume: React.FC = () => {
               
               <div className="space-y-6">
                 {resumeData.educations.map((education, index) => (
-                  <BlockLayout key={education.id}>
+                  <BlockLayout key={education.id} className="group">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <Typography variant="h3">教育经历 {index + 1}</Typography>
-                        <Button
-                          variant="ghost"
-                          size="sm-icon"
-                          onClick={() => removeEducation(education.id)}
-                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                          tooltip="删除教育经历"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
+                        <DeleteButton
+                          hasContent={hasEducationContent(education)}
+                          onDelete={() => removeEducation(education.id)}
+                          itemIndex={index}
+                        />
                       </div>
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1108,19 +1222,15 @@ export const Resume: React.FC = () => {
               
               <div className="space-y-6">
                 {resumeData.awards.map((award, index) => (
-                  <BlockLayout key={award.id}>
+                  <BlockLayout key={award.id} className="group">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <Typography variant="h3">奖励 {index + 1}</Typography>
-                        <Button
-                          variant="ghost"
-                          size="sm-icon"
-                          onClick={() => removeAward(award.id)}
-                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                          tooltip="删除奖励"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
+                        <DeleteButton
+                          hasContent={hasAwardContent(award)}
+                          onDelete={() => removeAward(award.id)}
+                          itemIndex={index}
+                        />
                       </div>
                       
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1183,19 +1293,15 @@ export const Resume: React.FC = () => {
               
               <div className="space-y-6">
                 {resumeData.papers.map((paper, index) => (
-                  <BlockLayout key={paper.id}>
+                  <BlockLayout key={paper.id} className="group">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <Typography variant="h3">论文 {index + 1}</Typography>
-                        <Button
-                          variant="ghost"
-                          size="sm-icon"
-                          onClick={() => removePaper(paper.id)}
-                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                          tooltip="删除论文"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
+                        <DeleteButton
+                          hasContent={hasPaperContent(paper)}
+                          onDelete={() => removePaper(paper.id)}
+                          itemIndex={index}
+                        />
                       </div>
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1270,19 +1376,15 @@ export const Resume: React.FC = () => {
               
               <div className="space-y-6">
                 {resumeData.repositories.map((repository, index) => (
-                  <BlockLayout key={repository.id}>
+                  <BlockLayout key={repository.id} className="group">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <Typography variant="h3">代码仓库 {index + 1}</Typography>
-                        <Button
-                          variant="ghost"
-                          size="sm-icon"
-                          onClick={() => removeRepository(repository.id)}
-                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                          tooltip="删除代码仓库"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
+                        <DeleteButton
+                          hasContent={hasRepositoryContent(repository)}
+                          onDelete={() => removeRepository(repository.id)}
+                          itemIndex={index}
+                        />
                       </div>
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1349,19 +1451,15 @@ export const Resume: React.FC = () => {
               
               <div className="space-y-6">
                 {resumeData.patents.map((patent, index) => (
-                  <BlockLayout key={patent.id}>
+                  <BlockLayout key={patent.id} className="group">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <Typography variant="h3">专利 {index + 1}</Typography>
-                        <Button
-                          variant="ghost"
-                          size="sm-icon"
-                          onClick={() => removePatent(patent.id)}
-                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                          tooltip="删除专利"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
+                        <DeleteButton
+                          hasContent={hasPatentContent(patent)}
+                          onDelete={() => removePatent(patent.id)}
+                          itemIndex={index}
+                        />
                       </div>
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1416,19 +1514,15 @@ export const Resume: React.FC = () => {
               
               <div className="space-y-6">
                 {resumeData.socialMedia.map((social, index) => (
-                  <BlockLayout key={social.id}>
+                  <BlockLayout key={social.id} className="group">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <Typography variant="h3">社交媒体 {index + 1}</Typography>
-                        <Button
-                          variant="ghost"
-                          size="sm-icon"
-                          onClick={() => removeSocialMedia(social.id)}
-                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                          tooltip="删除社交媒体"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
+                        <DeleteButton
+                          hasContent={hasSocialMediaContent(social)}
+                          onDelete={() => removeSocialMedia(social.id)}
+                          itemIndex={index}
+                        />
                       </div>
                       
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1592,35 +1686,20 @@ export const Resume: React.FC = () => {
         </PageContainer>
 
       {/* 上传简历对话框 */}
-      {showUploadDialog && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-            <div className="space-y-4">
-              <div className="text-center">
-                <Typography variant="h3">上传简历识别</Typography>
-                <Typography variant="muted" className="mt-2">
-                  上传PDF格式的简历文件，系统将自动解析并填充表单
-                </Typography>
-              </div>
-              
-              <FileUpload
-                onFileSelect={handleUploadResume}
-                accept=".pdf"
-                maxSize={10 * 1024 * 1024} // 10MB
-              />
-              
-              <div className="flex gap-2 justify-end">
-                <Button 
-                  variant="outline" 
-                  onClick={() => setShowUploadDialog(false)}
-                >
-                  取消
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <Modal 
+        open={showUploadDialog} 
+        onOpenChange={setShowUploadDialog}
+        title="上传简历"
+        size="sm"
+      >
+        <FileUpload
+          variant="dropzone"
+          accept=".pdf"
+          maxSize={20 * 1024 * 1024} // 20MB
+          placeholder="拖拽简历文件到此处或点击上传"
+          onFileSelect={handleUploadResume}
+        />
+      </Modal>
     </div>
   );
 };

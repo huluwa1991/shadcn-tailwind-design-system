@@ -29,6 +29,11 @@ const meta: Meta<typeof FileUpload> = {
       control: 'text',
       description: '按钮占位文字',
     },
+    variant: {
+      control: 'radio',
+      options: ['button', 'dropzone'],
+      description: '组件变体',
+    },
   },
 }
 
@@ -65,5 +70,38 @@ export const DocumentsOnly: Story = {
     maxSize: 10 * 1024 * 1024, // 10MB
     helperText: '支持 PDF、Word 文档和文本文件，大小不超过 10MB',
     placeholder: '选择文档',
+  },
+}
+
+export const DropzoneDefault: Story = {
+  args: {
+    variant: 'dropzone',
+    placeholder: '点击上传或将文件拖拽到此处',
+  },
+}
+
+export const DropzoneImageOnly: Story = {
+  args: {
+    variant: 'dropzone',
+    accept: 'image/*',
+    maxSize: 5 * 1024 * 1024, // 5MB
+    placeholder: '上传图片文件',
+  },
+}
+
+export const DropzoneDocuments: Story = {
+  args: {
+    variant: 'dropzone',
+    accept: '.pdf,.doc,.docx',
+    maxSize: 10 * 1024 * 1024, // 10MB
+    placeholder: '上传文档',
+  },
+}
+
+export const DropzoneDisabled: Story = {
+  args: {
+    variant: 'dropzone',
+    disabled: true,
+    placeholder: '上传已禁用',
   },
 }
