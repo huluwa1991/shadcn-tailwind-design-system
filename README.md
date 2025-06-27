@@ -4,11 +4,11 @@
 
 ## ✨ 特性
 
-- 🎨 **30+ 精美组件** - 基础、表单、导航、反馈、展示、布局等组件
+- 🎨 **40+ 精美组件** - 涵盖基础、数据录入、导航、反馈、数据展示、布局等完整场景
 - 📖 **Storybook 文档** - 完整的组件文档和交互式示例
-- 🎯 **TypeScript 支持** - 完整的类型定义
-- 🌙 **深色模式** - 内置明暗主题切换
-- 📱 **响应式设计** - 支持各种屏幕尺寸
+- 🎯 **TypeScript 支持** - 完整的类型定义和类型安全
+- 🌙 **深色模式** - 内置明暗主题切换支持
+- 📱 **响应式设计** - 支持各种屏幕尺寸的自适应布局
 
 ## 🚀 快速开始
 
@@ -19,7 +19,7 @@ npm install
 # 启动开发服务器
 npm run dev
 
-# 启动 Storybook
+# 启动 Storybook 文档
 npm run storybook
 
 # 构建项目
@@ -28,19 +28,31 @@ npm run build
 
 ## 📦 组件分类
 
-- **基础组件**: Button, Input, Label, Textarea, Avatar, Badge
-- **数据录入**: Checkbox, Radio, Select, Switch, Date Picker, File Upload
-- **导航组件**: Sidebar, Tabs, Steps, Pagination, Command
-- **反馈组件**: Alert, Modal, Dialog, Tooltip, Popover
-- **数据展示**: Table, Typography, Tags, Filter
-- **布局组件**: Page Container, Page Header, Block Layout
+### 基础组件
+Button, Avatar, Badge, Label, Typography, ButtonGroup, ColorPalette, Dropdown
+
+### 数据录入组件
+Input, Textarea, Select, Checkbox, RadioGroup, Switch, DatePicker, Calendar, FileUpload, SearchInput, CitySelect, Cascader, TagsInput, Form
+
+### 导航组件
+Sidebar, TopNav, Tabs, Steps, Pagination, Command
+
+### 反馈组件
+Alert, Modal, Dialog, Tooltip, Popover, Popconfirm, Loading, Skeleton, Toast
+
+### 数据展示组件
+Table, Tag, Filter
+
+### 布局组件
+PageContainer, PageHeader, BlockLayout, Logo
 
 ## 🛠️ 技术栈
 
-- **React 18** + **TypeScript** + **Tailwind CSS** + **Vite**
-- **shadcn/ui** + **Radix UI** - 组件基础
-- **Storybook** - 组件文档
-- **ESLint + Prettier** - 代码规范
+- **前端框架**: React 18 + TypeScript
+- **样式方案**: Tailwind CSS 4.x
+- **构建工具**: Vite 5.x
+- **UI 基础**: shadcn/ui + Radix UI
+- **文档工具**: Storybook 8.x
 
 ## 🎯 使用示例
 
@@ -49,13 +61,23 @@ import { Button, Input, Alert } from '@/components/ui'
 
 function App() {
   return (
-    <div>
-      <Alert variant="default">欢迎使用设计系统！</Alert>
-      <Input placeholder="输入内容..." />
+    <div className="p-6 space-y-4">
+      <Alert variant="default">
+        欢迎使用 Shadcn Tailwind Design System！
+      </Alert>
+      <Input placeholder="请输入内容..." />
       <Button variant="default">点击按钮</Button>
     </div>
   )
 }
+```
+
+## 📚 组件文档
+
+访问 Storybook 查看完整的组件文档：
+
+```bash
+npm run storybook
 ```
 
 ## 🤝 贡献指南
