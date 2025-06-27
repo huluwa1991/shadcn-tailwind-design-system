@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Demo } from '../components/Demo1-UserManagement';
+import { Demo } from '../../demos/Demo1-UserManagement/Demo1-UserManagement';
 
 const meta = {
-  title: 'Pages/Demo1-UserManagement',
+  title: 'Demos/Demo1-UserManagement',
   component: Demo,
   parameters: {
     layout: 'fullscreen',

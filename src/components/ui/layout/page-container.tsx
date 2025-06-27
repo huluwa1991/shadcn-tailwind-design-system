@@ -20,21 +20,7 @@ const pageContainerVariants = cva(
 );
 
 const containerVariants = cva(
-  'rounded-xl border border-container-border bg-container text-container-foreground shadow h-full overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground dark:scrollbar-thumb-border dark:hover:scrollbar-thumb-muted-foreground',
-  {
-    variants: {
-      shadow: {
-        default: 'shadow',
-      },
-      rounded: {
-        xl: 'rounded-xl',
-      },
-    },
-    defaultVariants: {
-      shadow: 'default',
-      rounded: 'xl',
-    },
-  }
+  'rounded-xl border border-container-border bg-container text-container-foreground shadow h-full overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground dark:scrollbar-thumb-border dark:hover:scrollbar-thumb-muted-foreground'
 );
 
 const contentVariants = cva(
@@ -43,7 +29,7 @@ const contentVariants = cva(
     variants: {
       variant: {
         full: 'max-w-[1440px] mx-auto px-8',
-        centered: 'w-[768px] max-w-[90vw] mx-auto px-6',
+        centered: 'w-[768px] max-w-[90vw] mx-auto',
       },
     },
     defaultVariants: {
@@ -54,7 +40,6 @@ const contentVariants = cva(
 
 export interface PageContainerProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof containerVariants>,
     VariantProps<typeof pageContainerVariants> {
   variant?: 'full' | 'centered';
   asChild?: boolean;
@@ -65,8 +50,6 @@ const PageContainer = React.forwardRef<HTMLDivElement, PageContainerProps>(
     className, 
     variant = 'full', 
     padding = 'default',
-    shadow, 
-    rounded, 
     asChild = false, 
     children, 
     ...props 
@@ -76,7 +59,7 @@ const PageContainer = React.forwardRef<HTMLDivElement, PageContainerProps>(
     return (
       <div className={cn(pageContainerVariants({ padding }))}>
         <Comp
-          className={cn(containerVariants({ shadow, rounded }), 'w-full', className)}
+          className={cn(containerVariants(), 'w-full', className)}
           ref={ref}
           {...props}
         >

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Input, Label } from '../../components/ui';
+import { Input } from '../../components/ui';
 
 const meta = {
   title: 'Data Entry/Input',
@@ -12,15 +12,16 @@ const meta = {
   argTypes: {
     type: {
       control: { type: 'select' },
-      options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search'],
+      options: ['text', 'email', 'password', 'number', 'tel', 'url'],
+    },
+    inputSize: {
+      control: { type: 'select' },
+      options: ['sm', 'default', 'lg'],
     },
     placeholder: {
       control: 'text',
     },
     disabled: {
-      control: 'boolean',
-    },
-    required: {
       control: 'boolean',
     },
   },
@@ -35,60 +36,36 @@ export const Default: Story = {
   },
 };
 
-// 必填状态展示
-export const Required: Story = {
-  render: (args) => (
-    <div className="flex flex-col gap-2">
-      <Label htmlFor="required-input" required>姓名</Label>
-      <Input 
-        id="required-input" 
-        placeholder="请输入您的姓名" 
-        required 
-        {...args} 
-      />
-    </div>
-  ),
-};
-
-// 必填状态但不显示红点
-export const RequiredWithoutIndicator: Story = {
-  render: (args) => (
-    <div className="flex flex-col gap-2">
-      <Label htmlFor="required-no-dot" required>邮箱</Label>
-      <Input 
-        id="required-no-dot" 
-        type="email"
-        placeholder="请输入邮箱地址" 
-        required 
-        {...args} 
-      />
-    </div>
-  ),
-};
-
-export const WithLabel: Story = {
-  render: (args) => (
-    <div className="flex flex-1 flex-col gap-2">
-      <Label htmlFor="email">邮箱</Label>
-      <Input type="email" id="email" placeholder="请输入邮箱地址" {...args} />
-    </div>
-  ),
-};
-
-export const ExpectedStyle: Story = {
+// 不同尺寸展示
+export const Sizes: Story = {
   render: () => (
-    <div className="flex flex-1 flex-col gap-2">
-      <Label htmlFor="name">Name</Label>
-      <Input id="name" placeholder="Evil Rabbit" />
+    <div className="flex flex-col gap-4 w-80">
+      <div className="space-y-2">
+        <div className="text-sm font-medium">Small</div>
+        <Input inputSize="sm" placeholder="小尺寸输入框" />
+      </div>
+      <div className="space-y-2">
+        <div className="text-sm font-medium">Default</div>
+        <Input inputSize="default" placeholder="默认尺寸输入框" />
+      </div>
+      <div className="space-y-2">
+        <div className="text-sm font-medium">Large</div>
+        <Input inputSize="lg" placeholder="大尺寸输入框" />
+      </div>
     </div>
   ),
 };
 
-export const Password: Story = {
-  render: (args) => (
-    <div className="flex flex-1 flex-col gap-2">
-      <Label htmlFor="password">密码</Label>
-      <Input type="password" id="password" placeholder="请输入密码" {...args} />
+// 不同类型展示
+export const Types: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4 w-80">
+      <Input type="text" placeholder="文本输入" />
+      <Input type="email" placeholder="邮箱地址" />
+      <Input type="password" placeholder="密码" />
+      <Input type="number" placeholder="数字" />
+      <Input type="tel" placeholder="电话号码" />
+      <Input type="url" placeholder="网址" />
     </div>
   ),
 };
@@ -98,29 +75,4 @@ export const Disabled: Story = {
     placeholder: '禁用状态',
     disabled: true,
   },
-};
-
-export const Number: Story = {
-  render: (args) => (
-    <div className="flex flex-1 flex-col gap-2">
-      <Label htmlFor="number">数量</Label>
-      <Input type="number" id="number" placeholder="请输入数量" {...args} />
-    </div>
-  ),
-};
-
-export const WithError: Story = {
-  render: () => (
-    <div className="flex flex-col gap-2">
-      <Label htmlFor="email-error" required>邮箱</Label>
-      <Input 
-        type="email" 
-        id="email-error" 
-        placeholder="请输入邮箱地址"
-        className="border-destructive"
-        required
-      />
-      <p className="text-sm text-destructive">请输入有效的邮箱地址</p>
-    </div>
-  ),
 };

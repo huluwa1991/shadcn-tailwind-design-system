@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ArchiveX, Trash2, Plus } from 'lucide-react';
+import { useState } from 'react';
 
-import { Button } from '../../components/ui';
+import { Button, ButtonWithLoading } from '../../components/ui';
 
 const meta = {
   title: 'Base/Button',
@@ -35,143 +36,132 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+// 基础按钮变体
 export const Default: Story = {
   args: {
     children: 'Button',
   },
 };
 
-export const Secondary: Story = {
-  args: {
-    variant: 'secondary',
-    children: 'Secondary',
-  },
-};
-
-export const Destructive: Story = {
-  args: {
-    variant: 'destructive',
-    children: 'Destructive',
-  },
-};
-
-export const Outline: Story = {
-  args: {
-    variant: 'outline',
-    children: 'Outline',
-  },
-};
-
-export const Ghost: Story = {
-  args: {
-    variant: 'ghost',
-    children: 'Ghost',
-  },
-};
-
-export const Link: Story = {
-  args: {
-    variant: 'link',
-    children: 'Link',
-  },
-};
-
-export const Small: Story = {
-  args: {
-    size: 'sm',
-    children: 'Small',
-  },
-};
-
-export const Large: Story = {
-  args: {
-    size: 'lg',
-    children: 'Large',
-  },
-};
-
-export const WithIcon: Story = {
+export const Variants: Story = {
   render: () => (
-    <Button>
-      <Plus className="h-4 w-4" />
-      创建任务
-    </Button>
+    <div className="flex flex-wrap gap-2">
+      <Button variant="default">Default</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="destructive">Destructive</Button>
+      <Button variant="outline">Outline</Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button variant="link">Link</Button>
+    </div>
   ),
 };
 
-export const SmallIcon: Story = {
+export const Sizes: Story = {
   render: () => (
-    <Button size="sm-icon" variant="ghost" tooltip="移动到垃圾箱">
-      <ArchiveX className="h-4 w-4" />
-      <span className="sr-only">Move to junk</span>
-    </Button>
+    <div className="flex flex-wrap items-center gap-2">
+      <Button size="sm">Small</Button>
+      <Button size="default">Default</Button>
+      <Button size="lg">Large</Button>
+    </div>
   ),
 };
 
-export const WithIconButton: Story = {
+export const WithIcons: Story = {
   render: () => (
-    <Button size="withicon" variant="ghost" tooltip="大尺寸归档按钮">
-      <ArchiveX className="h-4 w-4" />
-      <span className="sr-only">Large Archive</span>
-    </Button>
-  ),
-};
-
-export const IconButtonsGroup: Story = {
-  render: () => (
-    <div className="flex gap-2">
-      <Button size="sm-icon" variant="ghost" tooltip="归档">
-        <ArchiveX className="h-4 w-4" />
-        <span className="sr-only">Archive</span>
+    <div className="flex flex-wrap gap-2">
+      <Button>
+        <Plus className="h-4 w-4" />
+        创建任务
       </Button>
-      <Button size="sm-icon" variant="ghost" tooltip="删除">
-        <Trash2 className="h-4 w-4" />
-        <span className="sr-only">Delete</span>
-      </Button>
-      <Button size="withicon" variant="ghost" tooltip="大尺寸归档">
-        <ArchiveX className="h-4 w-4" />
-        <span className="sr-only">Large Archive</span>
+      <Button variant="outline">
+        <Plus className="h-4 w-4" />
+        添加项目
       </Button>
     </div>
   ),
 };
 
-export const Disabled: Story = {
-  args: {
-    disabled: true,
-    children: 'Disabled',
-  },
+export const IconButtons: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <Button size="sm-icon" variant="ghost" tooltip="归档">
+        <ArchiveX className="h-4 w-4" />
+      </Button>
+      <Button size="sm-icon" variant="ghost" tooltip="删除">
+        <Trash2 className="h-4 w-4" />
+      </Button>
+      <Button size="withicon" variant="ghost" tooltip="大尺寸归档">
+        <ArchiveX className="h-4 w-4" />
+      </Button>
+    </div>
+  ),
 };
 
-export const AllVariants: Story = {
+export const States: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-2">
+      <Button>Normal</Button>
+      <Button disabled>Disabled</Button>
+      <ButtonWithLoading loading>Loading</ButtonWithLoading>
+    </div>
+  ),
+};
+
+// ButtonWithLoading 专门展示
+export const LoadingButton: Story = {
   render: () => {
+    const [isLoading, setIsLoading] = useState(false);
+    
+    const handleSubmit = () => {
+      setIsLoading(true);
+      // 模拟异步操作
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+    };
+    
     return (
       <div className="flex flex-col gap-4">
         <div className="flex flex-wrap gap-2">
-          <Button variant="default">Default</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="destructive">Destructive</Button>
-          <Button variant="outline">Outline</Button>
-          <Button variant="ghost">Ghost</Button>
-          <Button variant="link">Link</Button>
+          <ButtonWithLoading loading loadingText="保存中...">保存</ButtonWithLoading>
+          <ButtonWithLoading loading={false}>正常状态</ButtonWithLoading>
+          <ButtonWithLoading loading variant="secondary">次要按钮</ButtonWithLoading>
+          <ButtonWithLoading loading variant="outline" loadingText="处理中...">轮廓按钮</ButtonWithLoading>
         </div>
-        <div className="flex flex-wrap gap-2 items-center">
-          <Button size="sm">Small</Button>
-          <Button size="default">Default</Button>
-          <Button size="lg">Large</Button>
-          <Button size="withicon" tooltip="表情符号按钮">🔥</Button>
-          <Button size="sm-icon" variant="ghost" tooltip="归档"><ArchiveX className="h-4 w-4" /></Button>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <Button disabled>Disabled Default</Button>
-          <Button variant="secondary" disabled>Disabled Secondary</Button>
-          <Button variant="outline" disabled>Disabled Outline</Button>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <Button><Plus className="h-4 w-4" />创建任务</Button>
-          <Button variant="outline"><Plus className="h-4 w-4" />添加项目</Button>
+        
+        <div className="border-t pt-4">
+          <div className="flex gap-2 items-center">
+            <ButtonWithLoading
+              loading={isLoading}
+              onClick={handleSubmit}
+              loadingText="提交中..."
+            >
+              提交表单
+            </ButtonWithLoading>
+            <Button 
+              variant="outline" 
+              onClick={() => setIsLoading(false)}
+              disabled={!isLoading}
+              size="sm"
+            >
+              取消
+            </Button>
+          </div>
+          <p className="text-xs text-muted-foreground mt-2">
+            点击提交按钮测试加载状态 (2秒)
+          </p>
         </div>
       </div>
     );
   },
+};
+
+export const LoadingSizes: Story = {
+  render: () => (
+    <div className="flex flex-wrap items-center gap-2">
+      <ButtonWithLoading loading size="sm" loadingText="小">Small</ButtonWithLoading>
+      <ButtonWithLoading loading size="default" loadingText="默认">Default</ButtonWithLoading>
+      <ButtonWithLoading loading size="lg" loadingText="大">Large</ButtonWithLoading>
+    </div>
+  ),
 }; 

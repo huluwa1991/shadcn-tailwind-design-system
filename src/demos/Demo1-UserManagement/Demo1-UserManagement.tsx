@@ -23,7 +23,8 @@ import {
   SelectContainer,
   MultiSelectTrigger,
   MultiSelectItem
-} from './ui';
+} from '../../components/ui';
+import { useResponsiveSidebar } from '@/lib/utils';
 
 // 模拟用户数据
 const mockUsers = [
@@ -116,7 +117,7 @@ const roleLabels = roleOptions.reduce((acc, option) => {
 }, {} as Record<string, string>);
 
 export const Demo: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const { collapsed, onCollapsedChange } = useResponsiveSidebar('full');
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
   const [isRoleSelectOpen, setIsRoleSelectOpen] = useState(false);
 
@@ -154,7 +155,7 @@ export const Demo: React.FC = () => {
       <div>
         <Sidebar 
           collapsed={collapsed}
-          onCollapsedChange={setCollapsed}
+          onCollapsedChange={onCollapsedChange}
         />
       </div>
       

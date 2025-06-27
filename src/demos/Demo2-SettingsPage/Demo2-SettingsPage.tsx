@@ -6,7 +6,6 @@ import {
   Typography,
   Switch,
   Input,
-  Label,
   BlockLayout,
   Button,
   Select, 
@@ -15,7 +14,13 @@ import {
   SelectTrigger, 
   SelectValue,
   SelectContainer
-} from './ui';
+} from '../../components/ui';
+import {
+  FormSection,
+  FormItem,
+  FormLabel,
+  FormControl
+} from '../../components/ui/data-entry/form';
 
 // 设置项类型定义
 interface BaseSetting {
@@ -298,46 +303,45 @@ export const Demo2: React.FC = () => {
                       if (setting.type === 'section') {
                         // 个人资料表单部分
                         return (
-                          <div key={setting.id}>
-                            <div className="space-y-1 mb-4">
-                              <Typography variant="h3">
-                                {setting.title}
-                              </Typography>
-                              <Typography variant="muted">
-                                {setting.description}
-                              </Typography>
-                            </div>
-                            
-                            <div className="space-y-4">
-                              <div className="space-y-2">
-                                <Label>用户名</Label>
+                          <FormSection 
+                            key={setting.id}
+                            title={setting.title}
+                            subtitle={setting.description}
+                          >
+                            <FormItem>
+                              <FormLabel>用户名</FormLabel>
+                              <FormControl>
                                 <Input
                                   value={profileData.name}
                                   onChange={(e) => handleProfileChange('name', e.target.value)}
                                   placeholder="请输入用户名"
                                 />
-                              </div>
-                              
-                              <div className="space-y-2">
-                                <Label>邮箱地址</Label>
+                              </FormControl>
+                            </FormItem>
+                            
+                            <FormItem>
+                              <FormLabel>邮箱地址</FormLabel>
+                              <FormControl>
                                 <Input
                                   type="email"
                                   value={profileData.email}
                                   onChange={(e) => handleProfileChange('email', e.target.value)}
                                   placeholder="请输入邮箱地址"
                                 />
-                              </div>
-                              
-                              <div className="space-y-2">
-                                <Label>手机号码</Label>
+                              </FormControl>
+                            </FormItem>
+                            
+                            <FormItem>
+                              <FormLabel>手机号码</FormLabel>
+                              <FormControl>
                                 <Input
                                   value={profileData.phone}
                                   onChange={(e) => handleProfileChange('phone', e.target.value)}
                                   placeholder="请输入手机号码"
                                 />
-                              </div>
-                            </div>
-                          </div>
+                              </FormControl>
+                            </FormItem>
+                          </FormSection>
                         );
                       }
 
