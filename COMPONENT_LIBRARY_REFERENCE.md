@@ -5,6 +5,7 @@
 ### Button
 **变体**: `default` | `destructive` | `outline` | `secondary` | `ghost` | `link`
 **尺寸**: `default` | `sm` | `lg` | `withicon` | `sm-icon`
+**使用场景**: default(主要操作) | outline(次要操作) | ghost(工具栏) | destructive(删除)
 **特殊**: 图标按钮需要 `tooltip` 属性
 
 ### ButtonWithLoading
@@ -13,12 +14,14 @@
 
 ### Badge
 **变体**: `destructive` | `muted`
+**使用场景**: 数量提示
 
 ### Avatar
 **组件**: `Avatar`, `AvatarUserInfo`, `AvatarWithInfo`
 
 ### Typography
-**变体**: `h1` | `h2` | `h3` | `h4` | `body` | `small` | `muted` | `code`
+**变体**: `h1` | `h2` | `h3` | `body` | `muted` | `code`
+**使用场景**: h1(页面标题) | h2(模块标题) | h3(区块标题) | body(正文) | muted(辅助信息)
 
 ### Dropdown
 **组件**: `DropdownTrigger`, `DropdownContent`, `DropdownItem`, `DropdownSeparator`
@@ -30,13 +33,15 @@
 **组件**: `FormRow`, `FormSection`, `FormItem`, `FormLabel`, `FormControl`, `FormMessage`
 
 ### Input / Textarea
-基础文本输入组件
+**使用场景**: Input(单行文本) | Textarea(多行文本、描述信息)
 
 ### Select
 **组件**: `SelectTrigger`, `SelectContent`, `SelectItem`, `MultiSelectTrigger`
+**使用场景**: 单选下拉、多选下拉、选项较多时替代 RadioGroup
 
 ### Checkbox / RadioGroup
 **组件**: `Checkbox`, `CheckboxLabel`, `RadioGroupItem`, `RadioGroupLabel`
+**使用场景**: Checkbox(多选) | RadioGroup(单选、选项较少)
 
 ### Switch
 基础开关组件
@@ -51,10 +56,10 @@
 **变体**: 支持不同样式的搜索输入
 
 ### CitySelect / Cascader
-级联选择器组件
+**使用场景**: 地区选择、分级数据选择、树形结构选择
 
 ### TagsInput
-标签输入组件
+**使用场景**: 标签输入、关键词输入
 
 ## 导航组件 (Navigation)
 
@@ -114,16 +119,19 @@
 ## 布局组件 (Layout)
 
 ### PageContainer
-**变体**: `full`
-**内边距**: `default`
+**变体**: `full` | `centered`
+**内边距**: `default` | `nav-layout`
+**使用场景**: 页面最外层容器，full(宽布局) | centered(窄布局)
 
 ### PageHeader
-**组件**: `PageHeaderHeader`, `PageHeaderTitle`, `PageHeaderActions`, `PageHeaderContent`
+**组件**: `PageHeaderWrapper`, `PageHeaderTitle`, `PageHeaderActions`
+**变体**: `title-only` | `title-with-actions` | `title-with-toolbar`
+**使用场景**: 页面标题区域，推荐使用 PageHeaderWrapper
 
 ### BlockLayout
 **内边距**: `sm` | `default`
 **阴影**: `none` | `sm`
-**圆角**: `md` | `lg`
+**使用场景**: 内容区块容器，替代裸 div，信息面板
 
 ## 使用说明
 

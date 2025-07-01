@@ -6,19 +6,6 @@
 重要性越高，间距越大
 ```
 
-## 补充原则（待整理归纳）
-
-### 语义化组件优先
-```
-表单布局 → 用 Form 组件系统（详见 form.tsx）
-信息面板 → 用 BlockLayout，不用 div
-```
-
-### 对齐原则
-```
-视觉平衡优先，比如不要把元素全部堆叠在页面一侧，会失衡
-```
-
 ## 内边距（Padding）标准
 
 ### 核心规律
@@ -87,3 +74,56 @@
 按钮组: gap-2 (相关按钮) / gap-4 (独立按钮)
 信息面板: p-4 (内容) + space-y-3 (信息组) + gap-2 (标签组)
 ``` 
+
+## 补充原则（待整理归纳）
+
+### 语义化组件优先
+```
+表单布局 → 用 Form 组件系统（详见 form.tsx）
+信息面板 → 用 BlockLayout，不用 div
+```
+
+### 间距补充规范
+```
+严禁缩进效果 → 不使用任何形式的缩进表示层级
+严禁 margin 间隔 → 只用 gap/space/padding 创建间距
+```
+
+### 对齐原则
+```
+视觉平衡优先，比如不要把元素全部堆叠在页面一侧，会失衡
+```
+
+## 布局组件使用规范
+
+### 页面开发起手式
+```
+1. PageContainer → 页面最外层容器，自动处理背景和滚动
+2. PageHeader → 页面标题区域，支持三种变体
+3. BlockLayout → 内容区块容器，替代裸 div
+```
+
+### PageContainer（页面容器）
+```
+variant="full"     → 宽布局
+variant="centered" → 窄布局
+padding="default"  → 标准间距（p-2 外层）
+padding="nav-layout" → [特殊]横向导航布局（pb-4 px-6）
+```
+
+### PageHeader（页面标题）
+```
+variant="title-only"         → 纯标题（简单页面）
+variant="title-with-actions" → 标题+操作按钮（列表页）
+variant="title-with-toolbar" → 标题+工具栏（筛选+操作）
+组件：PageHeaderWrapper 一键配置，自动处理间距
+```
+
+### BlockLayout（内容区块）
+```
+padding="default" → 24px 内边距（舒适模式）
+padding="sm"      → 16px 内边距（紧凑模式）
+shadow="sm"       → 标准阴影（默认）
+shadow="none"     → 无阴影（嵌套时）
+用途：信息面板、表单容器、卡片内容
+```
