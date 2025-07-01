@@ -90,7 +90,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
   return (
     <BlockLayout 
       padding="default" 
-      shadow="sm" 
+      shadow="xs" 
       className="cursor-pointer hover:shadow-md transition-shadow duration-200 relative"
       onClick={handleClick}
     >

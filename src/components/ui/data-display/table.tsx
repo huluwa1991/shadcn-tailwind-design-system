@@ -6,6 +6,15 @@ import { cn } from "@/lib/utils"
 import { Checkbox } from '../data-entry/checkbox'
 import { Button } from '../base/button'
 import { Tag } from './tags'
+import { 
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '../navigation/pagination'
 
 // Context for Table configuration
 const TableContext = React.createContext<{
@@ -636,6 +645,277 @@ const NameCell = React.forwardRef<HTMLTableCellElement, NameCellProps>(
 )
 NameCell.displayName = "NameCell"
 
+// 新增：分页相关的类型定义
+export interface PaginationState {
+  /** 当前页码（从1开始） */
+  current: number
+  /** 每页显示的记录数 */
+  pageSize: number
+  /** 总记录数 */
+  total: number
+  /** 是否显示快速跳转 */
+  showQuickJumper?: boolean
+  /** 是否显示每页条数选择器 */
+  showSizeChanger?: boolean
+  /** 每页条数选项 */
+  pageSizeOptions?: number[]
+}
+
+export interface TablePaginationProps {
+  /** 分页状态 */
+  pagination: PaginationState
+  /** 页码变化回调 */
+  onPageChange: (page: number) => void
+  /** 每页条数变化回调 */
+  onPageSizeChange?: (pageSize: number) => void
+  /** 自定义样式类名 */
+  className?: string
+  /** 是否显示总数信息 */
+  showTotal?: boolean | ((total: number, range: [number, number]) => string)
+}
+
+export interface TableWithPaginationProps {
+  /** 表格数据 */
+  data: any[]
+  /** 列配置 */
+  columns: any[]
+  /** 分页配置 */
+  pagination?: PaginationState | false
+  /** 页码变化回调 */
+  onPageChange?: (page: number) => void
+  /** 每页条数变化回调 */
+  onPageSizeChange?: (pageSize: number) => void
+  /** 表格包装器属性 */
+  wrapperProps?: TableWrapperProps
+  /** 表格属性 */
+  tableProps?: React.HTMLAttributes<HTMLTableElement>
+  /** 自定义渲染内容 */
+  children?: React.ReactNode
+}
+
+// 新增：表格分页组件
+const TablePagination = React.forwardRef<HTMLDivElement, TablePaginationProps>(
+  ({ 
+    pagination, 
+    onPageChange, 
+    onPageSizeChange, 
+    className, 
+    showTotal = true,
+    ...props 
+  }, ref) => {
+    const { current, pageSize, total } = pagination
+    const totalPages = Math.ceil(total / pageSize)
+    
+    // 计算当前页显示的数据范围
+    const startIndex = (current - 1) * pageSize + 1
+    const endIndex = Math.min(current * pageSize, total)
+    
+    // 生成页码数组
+    const generatePageNumbers = () => {
+      const pages: (number | 'ellipsis')[] = []
+      const delta = 2 // 当前页左右显示的页码数量
+      
+      if (totalPages <= 7) {
+        // 总页数较少时，显示所有页码
+        for (let i = 1; i <= totalPages; i++) {
+          pages.push(i)
+        }
+      } else {
+        // 总页数较多时，显示省略号
+        pages.push(1)
+        
+        if (current <= delta + 3) {
+          // 当前页靠近开头
+          for (let i = 2; i <= Math.min(delta + 3, totalPages - 1); i++) {
+            pages.push(i)
+          }
+          if (totalPages > delta + 3) {
+            pages.push('ellipsis')
+          }
+        } else if (current >= totalPages - delta - 2) {
+          // 当前页靠近结尾
+          if (totalPages > delta + 3) {
+            pages.push('ellipsis')
+          }
+          for (let i = Math.max(totalPages - delta - 2, 2); i <= totalPages - 1; i++) {
+            pages.push(i)
+          }
+        } else {
+          // 当前页在中间
+          pages.push('ellipsis')
+          for (let i = current - delta; i <= current + delta; i++) {
+            pages.push(i)
+          }
+          pages.push('ellipsis')
+        }
+        
+        if (totalPages > 1) {
+          pages.push(totalPages)
+        }
+      }
+      
+      return pages
+    }
+    
+    const pageNumbers = generatePageNumbers()
+    
+    // 总数信息渲染
+    const renderTotal = () => {
+      if (!showTotal) return null
+      
+      if (typeof showTotal === 'function') {
+        return (
+          <div className="text-sm text-muted-foreground">
+            {showTotal(total, [startIndex, endIndex])}
+          </div>
+        )
+      }
+      
+      return (
+        <div className="text-sm text-muted-foreground">
+          共 {total} 条，第 {startIndex}-{endIndex} 条
+        </div>
+      )
+    }
+    
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "flex items-center justify-between",
+          className
+        )}
+        {...props}
+      >
+        {/* 左侧：总数信息 */}
+        <div className="flex-shrink-0">
+          {renderTotal()}
+        </div>
+        
+        {/* 右侧：分页器 */}
+        <div className="flex-shrink-0">
+          <Pagination>
+            <PaginationContent>
+              {/* 上一页 */}
+              <PaginationItem>
+                <PaginationPrevious 
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    if (current > 1) {
+                      onPageChange(current - 1)
+                    }
+                  }}
+                  className={current <= 1 ? "pointer-events-none opacity-50" : ""}
+                />
+              </PaginationItem>
+              
+              {/* 页码 */}
+              {pageNumbers.map((page, index) => (
+                <PaginationItem key={index}>
+                  {page === 'ellipsis' ? (
+                    <PaginationEllipsis />
+                  ) : (
+                    <PaginationLink
+                      href="#"
+                      isActive={page === current}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        onPageChange(page as number)
+                      }}
+                    >
+                      {page}
+                    </PaginationLink>
+                  )}
+                </PaginationItem>
+              ))}
+              
+              {/* 下一页 */}
+              <PaginationItem>
+                <PaginationNext
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    if (current < totalPages) {
+                      onPageChange(current + 1)
+                    }
+                  }}
+                  className={current >= totalPages ? "pointer-events-none opacity-50" : ""}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
+      </div>
+    )
+  }
+)
+TablePagination.displayName = "TablePagination"
+
+// 新增：带分页的完整表格组件
+const TableWithPagination = React.forwardRef<HTMLDivElement, TableWithPaginationProps>(
+  ({ 
+    data,
+    columns,
+    pagination,
+    onPageChange,
+    onPageSizeChange,
+    wrapperProps,
+    tableProps,
+    children,
+    ...props 
+  }, ref) => {
+    // 如果禁用分页，直接返回普通表格
+    if (pagination === false) {
+      return (
+        <div ref={ref} {...props}>
+          <TableWrapper {...wrapperProps}>
+            <Table {...tableProps}>
+              {children}
+            </Table>
+          </TableWrapper>
+        </div>
+      )
+    }
+    
+    // 分页逻辑
+    const currentPagination = pagination || {
+      current: 1,
+      pageSize: 10,
+      total: data.length,
+    }
+    
+    const handlePageChange = (page: number) => {
+      onPageChange?.(page)
+    }
+    
+    const handlePageSizeChange = (pageSize: number) => {
+      onPageSizeChange?.(pageSize)
+    }
+    
+    return (
+      <div ref={ref} className="space-y-4" {...props}>
+        {/* 表格主体 */}
+        <TableWrapper {...wrapperProps}>
+          <Table {...tableProps}>
+            {children}
+          </Table>
+        </TableWrapper>
+        
+        {/* 分页器 */}
+        {pagination && (
+          <TablePagination
+            pagination={currentPagination}
+            onPageChange={handlePageChange}
+            onPageSizeChange={handlePageSizeChange}
+          />
+        )}
+      </div>
+    )
+  }
+)
+TableWithPagination.displayName = "TableWithPagination"
+
 export {
   TableWrapper,
   Table,
@@ -655,6 +935,8 @@ export {
   ActionButtonsCell,
   IdCell,
   NameCell,
+  TablePagination,
+  TableWithPagination,
   tableWrapperVariants,
   tableVariants,
   tableHeaderVariants,

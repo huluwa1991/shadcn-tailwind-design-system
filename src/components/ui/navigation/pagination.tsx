@@ -20,7 +20,7 @@ const PaginationContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ul
     ref={ref}
-    className={cn("flex flex-row items-center gap-1", className)}
+    className={cn("flex flex-row items-center", className)}
     {...props}
   />
 ))
@@ -52,7 +52,7 @@ const PaginationLink = ({
         variant: isActive ? "outline" : "ghost",
         size,
       }),
-      "h-8 px-2 py-0 text-xs leading-none",
+      "h-8 px-3 py-0 text-xs leading-none min-w-[32px]",
       className
     )}
     {...props}
@@ -67,7 +67,7 @@ const PaginationPrevious = ({
   <PaginationLink
     aria-label="上一页"
     size="sm"
-    className={cn("gap-1 pl-2 h-8 px-2 py-0 text-xs leading-none", className)}
+    className={cn("gap-1 h-8 px-3 py-0 text-xs leading-none", className)}
     {...props}
   >
     <ChevronLeft className="h-3 w-3" />
@@ -83,7 +83,7 @@ const PaginationNext = ({
   <PaginationLink
     aria-label="下一页"
     size="sm"
-    className={cn("gap-1 pr-2 h-8 px-2 py-0 text-xs leading-none", className)}
+    className={cn("gap-1 h-8 px-3 py-0 text-xs leading-none", className)}
     {...props}
   >
     <span>下一页</span>
@@ -98,7 +98,7 @@ const PaginationEllipsis = ({
 }: React.ComponentProps<"span">) => (
   <span
     aria-hidden
-    className={cn("flex h-8 px-2 items-center justify-center text-xs leading-none", className)}
+    className={cn("flex h-8 px-3 items-center justify-center text-xs leading-none min-w-[32px]", className)}
     {...props}
   >
     <MoreHorizontal className="h-3 w-3" />

@@ -38,7 +38,7 @@ export const WeeklyRankingSidebar: React.FC<WeeklyRankingSidebarProps> = ({
   onItemClick,
 }) => {
   return (
-    <BlockLayout padding="default" shadow="sm">
+    <BlockLayout padding="default" shadow="xs">
       {/* 标题 */}
       <div className="flex items-center justify-between mb-4">
         <Typography variant="h3" className="font-medium">

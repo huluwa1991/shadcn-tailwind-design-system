@@ -14,10 +14,13 @@ import {
   CheckboxHeaderCell,
   ActionCell,
   TableEmptyState,
+  TablePagination,
+  TableWithPagination,
   Button,
   Checkbox,
   Tag,
 } from '../../components/ui';
+import type { PaginationState } from '../../components/ui';
 
 const meta = {
   title: 'Data Display/Table',
@@ -112,7 +115,7 @@ export const PageStickyHeader: Story = {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {Array.from({ length: 50 }).map((_, i) => (
+            {Array.from({ length: 15 }).map((_, i) => (
               <TableRow key={i}>
                 <TableCell>产品 {i + 1}</TableCell>
                 <TableCell variant="numeric">¥{(Math.random() * 1000).toFixed(2)}</TableCell>
@@ -655,6 +658,317 @@ export const RightStickyColumns: Story = {
             </TableBody>
           </Table>
         </TableWrapper>
+      </div>
+    );
+  },
+};
+
+// 新增：分页表格故事
+export const WithPagination: Story = {
+  render: () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 5;
+    
+    // 生成更多数据用于分页演示
+    const allData = Array.from({ length: 50 }, (_, i) => ({
+      id: i + 1,
+      name: `员工${i + 1}`,
+      email: `employee${i + 1}@company.com`,
+      role: ['管理员', '用户', '编辑'][i % 3],
+      status: ['active', 'inactive', 'pending'][i % 3],
+      createTime: `2024-${String(Math.floor(i / 10) + 1).padStart(2, '0')}-${String((i % 10) + 1).padStart(2, '0')}`,
+    }));
+
+    // 分页逻辑
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const currentData = allData.slice(startIndex, endIndex);
+
+    const pagination: PaginationState = {
+      current: currentPage,
+      pageSize: pageSize,
+      total: allData.length,
+    };
+
+    const handlePageChange = (page: number) => {
+      setCurrentPage(page);
+    };
+
+    const getStatusVariant = (status: string) => {
+      switch (status) {
+        case 'active': return 'success';
+        case 'inactive': return 'destructive';
+        case 'pending': return 'warning';
+        default: return 'default';
+      }
+    };
+
+    const getStatusText = (status: string) => {
+      switch (status) {
+        case 'active': return '活跃';
+        case 'inactive': return '非活跃';
+        case 'pending': return '待审核';
+        default: return status;
+      }
+    };
+
+    return (
+      <div className="p-6 space-y-6">
+        <div>
+          <h3 className="text-lg font-semibold mb-2">带分页的表格</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            演示表格与分页组件的集成使用，支持自动分页逻辑和页码切换。
+          </p>
+        </div>
+
+        {/* 使用 TablePagination 组件的方式 */}
+        <div className="space-y-4">
+          <TableWrapper bordered>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead cellWidth="xs">ID</TableHead>
+                  <TableHead cellWidth="sm">姓名</TableHead>
+                  <TableHead cellWidth="md">邮箱</TableHead>
+                  <TableHead cellWidth="sm">角色</TableHead>
+                  <TableHead cellWidth="sm">状态</TableHead>
+                  <TableHead cellWidth="sm">创建时间</TableHead>
+                  <TableHead cellWidth="sm">操作</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {currentData.map((item) => (
+                  <TableRow key={item.id}>
+                    <TableCell cellWidth="xs" className="font-mono text-muted-foreground">
+                      {item.id}
+                    </TableCell>
+                    <TableCell cellWidth="sm">{item.name}</TableCell>
+                    <TableCell cellWidth="md">{item.email}</TableCell>
+                    <TableCell cellWidth="sm">{item.role}</TableCell>
+                    <TableCell cellWidth="sm">
+                      <Tag variant={getStatusVariant(item.status)}>
+                        {getStatusText(item.status)}
+                      </Tag>
+                    </TableCell>
+                    <TableCell cellWidth="sm">{item.createTime}</TableCell>
+                    <TableCell cellWidth="sm">
+                      <div className="flex items-center gap-2">
+                        <Button variant="link" size="sm" className="h-auto p-0 text-sm">
+                          编辑
+                        </Button>
+                        <Button variant="link" size="sm" className="h-auto p-0 text-sm text-destructive">
+                          删除
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableWrapper>
+
+          <TablePagination
+            pagination={pagination}
+            onPageChange={handlePageChange}
+            showTotal={(total, range) => `共 ${total} 条记录，显示第 ${range[0]}-${range[1]} 条`}
+          />
+        </div>
+      </div>
+    );
+  },
+};
+
+// 新增：一体化分页表格故事
+export const IntegratedPagination: Story = {
+  render: () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 8;
+    
+    // 生成数据
+    const allData = Array.from({ length: 73 }, (_, i) => ({
+      id: i + 1,
+      name: `用户${i + 1}`,
+      email: `user${i + 1}@example.com`,
+      role: ['管理员', '用户', '编辑', '访客'][i % 4],
+      status: ['active', 'inactive', 'pending'][i % 3],
+      lastLogin: i % 5 === 0 ? '从未登录' : `2024-01-${String((i % 28) + 1).padStart(2, '0')} ${String((i % 12) + 10).padStart(2, '0')}:${String((i % 60)).padStart(2, '0')}`,
+    }));
+
+    const pagination: PaginationState = {
+      current: currentPage,
+      pageSize: pageSize,
+      total: allData.length,
+    };
+
+    const handlePageChange = (page: number) => {
+      setCurrentPage(page);
+    };
+
+    const getStatusVariant = (status: string) => {
+      switch (status) {
+        case 'active': return 'success';
+        case 'inactive': return 'destructive';
+        case 'pending': return 'warning';
+        default: return 'default';
+      }
+    };
+
+    const getStatusText = (status: string) => {
+      switch (status) {
+        case 'active': return '活跃';
+        case 'inactive': return '非活跃';
+        case 'pending': return '待审核';
+        default: return status;
+      }
+    };
+
+    // 当前页数据
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const currentData = allData.slice(startIndex, endIndex);
+
+    return (
+      <div className="p-6 space-y-6">
+        <div>
+          <h3 className="text-lg font-semibold mb-2">一体化分页表格</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            使用 TableWithPagination 组件，将表格和分页功能整合在一起，提供更简洁的 API。
+          </p>
+        </div>
+
+        <TableWithPagination
+          data={allData}
+          columns={[]} // 在实际使用中可以定义列配置
+          pagination={pagination}
+          onPageChange={handlePageChange}
+          wrapperProps={{ bordered: true }}
+        >
+          <TableHeader>
+            <TableRow>
+              <TableHead cellWidth="xs">ID</TableHead>
+              <TableHead cellWidth="sm">用户名</TableHead>
+              <TableHead cellWidth="md">邮箱</TableHead>
+              <TableHead cellWidth="sm">角色</TableHead>
+              <TableHead cellWidth="sm">状态</TableHead>
+              <TableHead cellWidth="md">最后登录</TableHead>
+              <TableHead cellWidth="sm">操作</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {currentData.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell cellWidth="xs" className="font-mono text-muted-foreground">
+                  {item.id}
+                </TableCell>
+                <TableCell cellWidth="sm">{item.name}</TableCell>
+                <TableCell cellWidth="md">{item.email}</TableCell>
+                <TableCell cellWidth="sm">{item.role}</TableCell>
+                <TableCell cellWidth="sm">
+                  <Tag variant={getStatusVariant(item.status)}>
+                    {getStatusText(item.status)}
+                  </Tag>
+                </TableCell>
+                <TableCell cellWidth="md">{item.lastLogin}</TableCell>
+                <TableCell cellWidth="sm">
+                  <div className="flex items-center gap-1">
+                    <Button variant="link" size="sm" className="h-auto p-0 text-sm">
+                      编辑
+                    </Button>
+                    <Button variant="link" size="sm" className="h-auto p-0 text-sm text-destructive">
+                      删除
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </TableWithPagination>
+      </div>
+    );
+  },
+};
+
+// 新增：自定义分页信息显示
+export const CustomPaginationInfo: Story = {
+  render: () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 6;
+    
+    const allData = Array.from({ length: 25 }, (_, i) => ({
+      id: i + 1,
+      product: `产品 ${i + 1}`,
+      price: (Math.random() * 1000).toFixed(2),
+      stock: Math.floor(Math.random() * 500),
+      category: ['电子产品', '服装', '家居', '书籍'][i % 4],
+      status: ['在售', '缺货', '预售'][i % 3],
+    }));
+
+    const pagination: PaginationState = {
+      current: currentPage,
+      pageSize: pageSize,
+      total: allData.length,
+    };
+
+    const handlePageChange = (page: number) => {
+      setCurrentPage(page);
+    };
+
+    const currentData = allData.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+    return (
+      <div className="p-6 space-y-6">
+        <div>
+          <h3 className="text-lg font-semibold mb-2">自定义分页信息</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            演示自定义分页信息显示格式，可以根据业务需求调整显示内容。
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <TableWrapper bordered>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead cellWidth="xs">ID</TableHead>
+                  <TableHead cellWidth="md">产品名称</TableHead>
+                  <TableHead cellWidth="sm" variant="numeric">价格</TableHead>
+                  <TableHead cellWidth="sm" variant="numeric">库存</TableHead>
+                  <TableHead cellWidth="sm">分类</TableHead>
+                  <TableHead cellWidth="sm">状态</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {currentData.map((item) => (
+                  <TableRow key={item.id}>
+                    <TableCell cellWidth="xs" className="font-mono text-muted-foreground">
+                      {item.id}
+                    </TableCell>
+                    <TableCell cellWidth="md">{item.product}</TableCell>
+                    <TableCell cellWidth="sm" variant="numeric">¥{item.price}</TableCell>
+                    <TableCell cellWidth="sm" variant="numeric">{item.stock}</TableCell>
+                    <TableCell cellWidth="sm">{item.category}</TableCell>
+                    <TableCell cellWidth="sm">
+                      <Tag variant={
+                        item.status === '在售' ? 'success' :
+                        item.status === '缺货' ? 'destructive' : 'warning'
+                      }>
+                        {item.status}
+                      </Tag>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableWrapper>
+
+          <TablePagination
+            pagination={pagination}
+            onPageChange={handlePageChange}
+            showTotal={(total, range) => 
+              `显示第 ${range[0]}-${range[1]} 项，共 ${total} 项产品`
+            }
+          />
+        </div>
       </div>
     );
   },

@@ -20,7 +20,7 @@ const pageContainerVariants = cva(
 );
 
 const containerVariants = cva(
-  'rounded-xl border border-container-border bg-container text-container-foreground shadow h-full overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground dark:scrollbar-thumb-border dark:hover:scrollbar-thumb-muted-foreground'
+  'rounded-xl border border-container-border bg-container text-container-foreground shadow-2xs h-full overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground dark:scrollbar-thumb-border dark:hover:scrollbar-thumb-muted-foreground'
 );
 
 const contentVariants = cva(

@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const blockLayoutVariants = cva(
-  'rounded-lg border border-block-layout-border bg-block-layout text-block-layout-foreground shadow-sm',
+  'rounded-lg border border-block-layout-border bg-block-layout text-block-layout-foreground shadow-xs',
   {
     variants: {
       padding: {
@@ -14,7 +14,7 @@ const blockLayoutVariants = cva(
       },
       shadow: {
         none: 'shadow-none',
-        sm: 'shadow-sm',
+        xs: 'shadow-xs',
       },
       rounded: {
         md: 'rounded-md',
@@ -23,7 +23,7 @@ const blockLayoutVariants = cva(
     },
     defaultVariants: {
       padding: 'default',
-      shadow: 'sm',
+      shadow: 'xs',
       rounded: 'lg',
     },
   }

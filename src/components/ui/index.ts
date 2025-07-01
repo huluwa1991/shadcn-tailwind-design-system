@@ -174,11 +174,18 @@ export {
   ActionButtonsCell,
   IdCell,
   NameCell,
+  TablePagination,
+  TableWithPagination,
   tableWrapperVariants,
   tableVariants,
   tableHeaderVariants,
   tableRowVariants,
   tableCellVariants,
+} from './data-display/table';
+export type { 
+  PaginationState, 
+  TablePaginationProps, 
+  TableWithPaginationProps 
 } from './data-display/table';
 export { Tag, tagVariants } from './data-display/tags';
 export { FilterItem, FilterGroup, filterVariants, filterGroupVariants } from './data-display/filter';
