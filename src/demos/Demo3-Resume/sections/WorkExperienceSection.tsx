@@ -101,9 +101,9 @@ export const WorkExperienceSection: React.FC<WorkExperienceSectionProps> = ({
         </FormItem>
       </FormRow>
       
-      {/* 第四行：类型 + 成果 (1:3 比例) */}
-      <FormRow columns={4}>
-        <FormItem span={1}>
+      {/* 第四行：类型 + 成果 (1:2 比例) */}
+      <div className="grid grid-cols-3 gap-4">
+        <FormItem>
           <FormLabel>类型</FormLabel>
           <SelectContainer width="full">
             <Select
@@ -122,7 +122,7 @@ export const WorkExperienceSection: React.FC<WorkExperienceSectionProps> = ({
           </SelectContainer>
         </FormItem>
         
-        <FormItem span={3}>
+        <FormItem className="col-span-2">
           <FormLabel>成果</FormLabel>
           <TagsInput
             value={item.achievements}
@@ -130,7 +130,7 @@ export const WorkExperienceSection: React.FC<WorkExperienceSectionProps> = ({
             placeholder="例如：写代码、优化系统性能、项目管理等..."
           />
         </FormItem>
-      </FormRow>
+      </div>
     </div>
   );
 

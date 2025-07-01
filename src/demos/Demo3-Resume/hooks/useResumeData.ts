@@ -126,10 +126,19 @@ export const useResumeData = (initialData: ResumeData = initialResumeData) => {
         return value.length > 0 && value.some(checkValue);
       }
       if (typeof value === 'object') {
-        return Object.values(value).some(checkValue);
+        // 检查是否为空对象
+        const objectValues = Object.values(value);
+        if (objectValues.length === 0) {
+          return false;
+        }
+        // 递归检查对象内部的值
+        return objectValues.some(checkValue);
       }
       if (typeof value === 'number') {
         return value > 0; // 对于 authorRank 等数字字段
+      }
+      if (typeof value === 'boolean') {
+        return false; // 布尔值字段不算内容（如isNameVerified等）
       }
       return true;
     };

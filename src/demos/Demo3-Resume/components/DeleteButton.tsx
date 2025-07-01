@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Trash2 } from 'lucide-react';
 import { Button, Popconfirm } from '../../../components/ui';
 
@@ -17,12 +17,7 @@ export const DeleteButton: React.FC<DeleteButtonProps> = ({
   confirmMessage = "确认删除本条吗？",
   className
 }) => {
-  // 用于跟踪Popconfirm的开启状态
-  const [popconfirmOpen, setPopconfirmOpen] = useState(false);
-
-  const baseClassName = `transition-opacity ${
-    popconfirmOpen ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-  } ${className || ''}`;
+  const baseClassName = `transition-opacity opacity-0 group-hover:opacity-100 ${className || ''}`;
 
   if (hasContent) {
     return (
@@ -31,8 +26,6 @@ export const DeleteButton: React.FC<DeleteButtonProps> = ({
         onConfirm={onDelete}
         confirmText="删除"
         cancelText="取消"
-        open={popconfirmOpen}
-        onOpenChange={setPopconfirmOpen}
       >
         <Button
           variant="ghost"
