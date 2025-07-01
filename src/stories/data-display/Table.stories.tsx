@@ -87,32 +87,32 @@ export const PageStickyHeader: Story = {
   render: () => (
     <div className="p-6">
       {/* 为页面级粘性表头创建特殊的容器，保持圆角边框但不影响sticky定位 */}
-      <div className="border border-border rounded-lg">
+      <TableWrapper bordered pageStickyHeader>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="sticky top-0 bg-muted/50 backdrop-blur-md border-b-2 border-border shadow-lg z-10">
+              <TableHead>
                 产品名称
               </TableHead>
-              <TableHead className="sticky top-0 bg-muted/50 backdrop-blur-md border-b-2 border-border shadow-lg z-10" variant="numeric">
+              <TableHead variant="numeric">
                 价格
               </TableHead>
-              <TableHead className="sticky top-0 bg-muted/50 backdrop-blur-md border-b-2 border-border shadow-lg z-10" variant="numeric">
+              <TableHead variant="numeric">
                 库存
               </TableHead>
-              <TableHead className="sticky top-0 bg-muted/50 backdrop-blur-md border-b-2 border-border shadow-lg z-10">
+              <TableHead>
                 分类
               </TableHead>
-              <TableHead className="sticky top-0 bg-muted/50 backdrop-blur-md border-b-2 border-border shadow-lg z-10">
+              <TableHead>
                 上架日期
               </TableHead>
-              <TableHead className="sticky top-0 bg-muted/50 backdrop-blur-md border-b-2 border-border shadow-lg z-10" variant="status">
+              <TableHead variant="status">
                 状态
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {Array.from({ length: 5 }).map((_, i) => (
+            {Array.from({ length: 50 }).map((_, i) => (
               <TableRow key={i}>
                 <TableCell>产品 {i + 1}</TableCell>
                 <TableCell variant="numeric">¥{(Math.random() * 1000).toFixed(2)}</TableCell>
@@ -132,7 +132,7 @@ export const PageStickyHeader: Story = {
             ))}
           </TableBody>
         </Table>
-      </div>
+      </TableWrapper>
     </div>
   ),
   parameters: {
@@ -276,7 +276,7 @@ export const HorizontalScroll: Story = {
         </p>
       </div>
       
-      <TableWrapper bordered className="overflow-x-auto">
+      <TableWrapper bordered>
         <Table className="min-w-max">
           <TableHeader>
             <TableRow>
@@ -392,7 +392,7 @@ export const ColumnWidthGuide: Story = {
           <h4 className="text-md font-medium mb-2">场景二：表格宽度 &gt; 容器宽度</h4>
           <p className="text-sm text-muted-foreground mb-3">若是宽度比较确定的字段（ID、电话号码、邮箱、日期 等等）优先使用fit (whitespace-nowrap)，如果宽度不是很确定的，则基于这个字段的数据的最大多数的长度的情况，来指定一个合适的固定宽度。</p>
           
-          <TableWrapper bordered className="overflow-x-auto">
+          <TableWrapper bordered>
             <Table className="min-w-max">
               <TableHeader>
                 <TableRow>
@@ -507,7 +507,7 @@ export const LeftStickyColumns: Story = {
           </p>
         </div>
         
-        <TableWrapper bordered className="max-w-full overflow-x-auto">
+        <TableWrapper bordered>
           <Table className="min-w-max">
             <TableHeader>
               <TableRow>
@@ -598,7 +598,7 @@ export const RightStickyColumns: Story = {
           </p>
         </div>
         
-        <TableWrapper bordered className="max-w-full overflow-x-auto">
+        <TableWrapper bordered>
           <Table className="min-w-max">
             <TableHeader>
               <TableRow>

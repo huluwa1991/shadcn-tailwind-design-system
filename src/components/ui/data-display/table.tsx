@@ -7,6 +7,13 @@ import { Checkbox } from '../data-entry/checkbox'
 import { Button } from '../base/button'
 import { Tag } from './tags'
 
+// Context for Table configuration
+const TableContext = React.createContext<{
+  pageStickyHeader?: boolean
+}>({})
+
+const useTableContext = () => React.useContext(TableContext)
+
 // 基础 Table 组件变体
 const tableVariants = cva(
   "w-full caption-bottom text-sm"
@@ -17,12 +24,17 @@ const tableWrapperVariants = cva(
   {
     variants: {
       bordered: {
-        true: "border border-border rounded-lg overflow-auto",
-        false: "overflow-auto",
+        true: "border border-border rounded-lg",
+        false: "",
+      },
+      scrollable: {
+        true: "overflow-auto",
+        false: "overflow-visible",
       },
     },
     defaultVariants: {
       bordered: false,
+      scrollable: true,
     },
   }
 )
@@ -110,7 +122,10 @@ const tableCellVariants = cva(
 // 类型定义 - 使用 Omit 来避免冲突
 export interface TableWrapperProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof tableWrapperVariants> {}
+    VariantProps<typeof tableWrapperVariants> {
+  /** 是否启用页面级粘性表头模式 */
+  pageStickyHeader?: boolean
+}
 
 export interface TableHeaderProps
   extends React.HTMLAttributes<HTMLTableSectionElement> {}
@@ -210,13 +225,44 @@ export interface NameCellProps {
 
 // TableWrapper 组件
 const TableWrapper = React.forwardRef<HTMLDivElement, TableWrapperProps>(
-  ({ className, bordered, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(tableWrapperVariants({ bordered }), className)}
-      {...props}
-    />
-  )
+  ({ className, bordered, scrollable, pageStickyHeader, children, ...props }, ref) => {
+    const contextValue = React.useMemo(() => ({
+      pageStickyHeader: !!pageStickyHeader
+    }), [pageStickyHeader])
+
+    // 如果是页面级粘性表头模式，需要特殊处理
+    if (pageStickyHeader) {
+      return (
+        <TableContext.Provider value={contextValue}>
+          <div
+            ref={ref}
+            className={cn(
+              tableWrapperVariants({ 
+                bordered, 
+                scrollable: false // 页面级粘性表头不在容器级别设置 overflow
+              }),
+              className
+            )}
+            {...props}
+          >
+            {children}
+          </div>
+        </TableContext.Provider>
+      )
+    }
+
+    return (
+      <TableContext.Provider value={contextValue}>
+        <div
+          ref={ref}
+          className={cn(tableWrapperVariants({ bordered, scrollable }), className)}
+          {...props}
+        >
+          {children}
+        </div>
+      </TableContext.Provider>
+    )
+  }
 )
 TableWrapper.displayName = "TableWrapper"
 
@@ -289,11 +335,16 @@ TableRow.displayName = "TableRow"
 
 const TableHead = React.forwardRef<HTMLTableHeaderCellElement, EnhancedTableHeadProps>(
   ({ className, variant = "header", stickyTop, stickyLeft, stickyRight, cellWidth, style, ...props }, ref) => {
+    const { pageStickyHeader } = useTableContext()
+    
+    // 如果TableWrapper设置了pageStickyHeader，则自动启用stickyTop
+    const shouldStickyTop = stickyTop || pageStickyHeader
+    
     // 基础表头样式
     const headerStyles = "align-middle h-12 p-4 font-medium text-muted-foreground"
     
     // 背景样式 - 为粘性表头添加毛玻璃效果
-    const backgroundStyles = stickyTop ? "bg-muted/50 backdrop-blur-md" : 
+    const backgroundStyles = shouldStickyTop ? "bg-muted/50 backdrop-blur-md" : 
                             (stickyLeft || stickyRight) ? "bg-muted/50 backdrop-blur-md" :
                             "bg-muted/50"
     
@@ -315,15 +366,15 @@ const TableHead = React.forwardRef<HTMLTableHeaderCellElement, EnhancedTableHead
                        ""
     
     // 层级控制
-    const zIndexClass = (stickyTop && (stickyLeft || stickyRight)) ? "z-30" :
-                       stickyTop ? "z-10" :
+    const zIndexClass = (shouldStickyTop && (stickyLeft || stickyRight)) ? "z-30" :
+                       shouldStickyTop ? "z-10" :
                        (stickyLeft || stickyRight) ? "z-20" :
                        ""
     
     // 粘性定位样式
     const stickyStyles = []
-    if (stickyTop) {
-      stickyStyles.push("sticky", "top-0", "border-b-2", "border-border", "shadow-lg")
+    if (shouldStickyTop) {
+      stickyStyles.push("sticky", "top-0", "border-b-2", "border-border", "shadow-lg", "first:rounded-tl-lg", "last:rounded-tr-lg")
     }
     if (stickyLeft) {
       stickyStyles.push("sticky", "left-0", "border-b-2", "border-border")
