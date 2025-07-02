@@ -3,14 +3,18 @@
   "version": "1.0.0",
   "type": "module",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "engines": {
     "node": ">=18.0.0",
-    "npm": ">=9.0.0"
+    "pnpm": ">=8.0.0"
   },
-  "packageManager": "npm@9.0.0",
+  "packageManager": "pnpm@8.0.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:lib": "pnpm --filter @shadcn-tailwind/ui... run build",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write ./src",
