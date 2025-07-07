@@ -23,7 +23,7 @@ const dropdownTriggerVariants = cva(
   {
     variants: {
       width: {
-        auto: 'w-auto min-w-[180px]',
+        auto: 'w-auto min-w-44',
         full: 'w-full',
       },
       variant: {
@@ -44,9 +44,9 @@ const dropdownContentVariants = cva(
   {
     variants: {
       size: {
-        sm: 'min-w-[8rem]',
-        md: 'min-w-[12rem]',
-        lg: 'min-w-[16rem]',
+        sm: 'min-w-32',
+        md: 'min-w-48',
+        lg: 'min-w-64',
         auto: 'w-auto',
         full: 'w-full',
       },

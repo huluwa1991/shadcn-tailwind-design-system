@@ -207,14 +207,13 @@ export const ColorPalette: React.FC = () => {
         <div>
           <div className="flex items-center space-x-4 mb-4">
             <div 
-              className="w-12 h-12 border border-border flex items-center justify-center text-xs text-muted-foreground"
-              style={{ borderRadius: '0.625rem' }}
+              className="w-12 h-12 border border-border flex items-center justify-center text-xs text-muted-foreground rounded-lg"
             >
               Radius
             </div>
             <div className="flex-1">
               <div className="font-medium text-foreground">Radius</div>
-              <div className="text-xs text-muted-foreground font-mono">0.625rem</div>
+              <div className="text-xs text-muted-foreground font-mono">0.5rem</div>
             </div>
           </div>
         </div>

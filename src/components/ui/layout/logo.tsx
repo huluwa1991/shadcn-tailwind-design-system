@@ -1,14 +1,21 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
+import { Zap } from 'lucide-react';
 
-interface LogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+interface LogoProps extends React.HTMLAttributes<HTMLDivElement> {
   lightSrc?: string;
   darkSrc?: string;
-  size?: 'sm' | 'md' | 'lg';
+  variant?: 'image' | 'placeholder';
 }
 
-const Logo = React.forwardRef<HTMLImageElement, LogoProps>(
-  ({ lightSrc = '/logo.png', darkSrc = '/logo_dark.png', size = 'md', className, ...props }, ref) => {
+const Logo = React.forwardRef<HTMLDivElement, LogoProps>(
+  ({ 
+    lightSrc = '/logo.png', 
+    darkSrc = '/logo_dark.png', 
+    variant = 'placeholder',
+    className, 
+    ...props 
+  }, ref) => {
     const [isDark, setIsDark] = React.useState(false);
 
     React.useEffect(() => {
@@ -62,19 +69,40 @@ const Logo = React.forwardRef<HTMLImageElement, LogoProps>(
       };
     }, []);
 
-    const sizeClasses = {
-      sm: 'h-4',
-      md: 'h-6', 
-      lg: 'h-8'
-    };
+    if (variant === 'placeholder') {
+      return (
+        <div
+          ref={ref}
+          className={cn(
+            'flex items-center gap-2 h-8',
+            className
+          )}
+          {...props}
+        >
+          <Zap 
+            className="h-5 w-5 text-primary"
+          />
+          <span 
+            className="font-semibold text-foreground text-base"
+          >
+            Acme Inc.
+          </span>
+        </div>
+      );
+    }
 
     return (
-      <img
+      <div
         ref={ref}
-        src={isDark ? darkSrc : lightSrc}
-        className={cn('w-auto', sizeClasses[size], className)}
+        className={cn('flex items-center h-6', className)}
         {...props}
-      />
+      >
+        <img
+          src={isDark ? darkSrc : lightSrc}
+          alt="Logo"
+          className="w-auto h-6"
+        />
+      </div>
     );
   }
 );
