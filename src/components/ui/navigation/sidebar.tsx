@@ -261,7 +261,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
                   size="default" 
                   className="h-8 text-sm data-[slot=sidebar-menu-button]:!p-1.5 hover:bg-transparent hover:text-inherit"
                 >
-                  <Logo alt="Company Logo" size="md" />
+                  <Logo />
                   <span className="sr-only">Company Logo</span>
                 </SidebarMenuButton>
               )}

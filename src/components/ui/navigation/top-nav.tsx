@@ -84,7 +84,7 @@ const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             className="cursor-pointer"
             onClick={onLogoClick}
           >
-            <Logo size="md" alt="Logo" />
+            <Logo />
           </div>
         </div>
 

@@ -39,20 +39,15 @@ export const WeeklyRankingSidebar: React.FC<WeeklyRankingSidebarProps> = ({
 }) => {
   return (
     <BlockLayout padding="default" shadow="xs">
-      {/* 标题 */}
+      {/* 标题和更新时间 */}
       <div className="flex items-center justify-between mb-4">
         <Typography variant="h3" className="font-medium">
           一周口碑榜
         </Typography>
         <Typography variant="muted" className="text-xs">
-          ······
+          6月27日 更新
         </Typography>
       </div>
-      
-      {/* 更新时间 */}
-      <Typography variant="muted" className="text-xs mb-4">
-        6月27日 更新
-      </Typography>
       
       {/* 排行榜列表 */}
       <div className="space-y-3">

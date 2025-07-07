@@ -1,5 +1,5 @@
 import React from 'react';
-import { BlockLayout, Typography, Badge, Tag } from '../../../components/ui';
+import { BlockLayout, Typography, Tag } from '../../../components/ui';
 import { Movie } from '../types';
 
 interface MovieCardProps {
@@ -94,15 +94,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
       className="cursor-pointer hover:shadow-md transition-shadow duration-200 relative"
       onClick={handleClick}
     >
-      {/* 排名和HOT标记 */}
-      <div className="absolute top-2 left-2 z-10 flex gap-1">
-        {movie.rank && (
-          <Badge>{movie.rank}</Badge>
-        )}
-        {movie.isHot && (
-          <Badge variant="destructive">HOT</Badge>
-        )}
-      </div>
+
 
       <div className="flex gap-3">
         {/* 电影海报 */}

@@ -228,7 +228,7 @@ export const Demo4: React.FC = () => {
         <PageContainer variant="full" padding="nav-layout">
           <div className="flex gap-8">
             {/* 左侧：活动列表区域 */}
-            <div className="flex-[2] flex flex-col gap-6">
+            <div className="flex-[2] flex flex-col space-y-6">
               {/* 页面标题区域 */}
               <div className="flex items-center justify-between">
                 <Typography variant="h1">

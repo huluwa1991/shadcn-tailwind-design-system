@@ -258,7 +258,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
           variant="outline"
           onClick={handleButtonClick}
           disabled={disabled}
-          className="gap-2 w-fit h-9"
+          className="gap-2 w-fit h-10"
         >
           <Upload className="h-5 w-5" />
           {selectedFile ? "更换文件" : placeholder}

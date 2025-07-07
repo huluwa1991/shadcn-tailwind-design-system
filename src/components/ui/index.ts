@@ -1,11 +1,11 @@
 // Base Components
 export { Button, ButtonWithLoading, buttonVariants } from './base/button';
-export type { ButtonWithLoadingProps } from './base/button';
+export type { ButtonProps, ButtonWithLoadingProps } from './base/button';
 export { Label } from './base/label';
 export { Avatar, AvatarUserInfo, AvatarWithInfo, avatarVariants } from './base/avatar';
 export { Badge, badgeVariants } from './base/badge';
 export { Typography, typographyVariants } from './base/typography';
-export { ButtonGroup } from './base/button-group';
+export { ButtonGroup, buttonGroupVariants } from './base/button-group';
 export { ColorPalette } from './base/color-palette';
 export {
   Dropdown,
@@ -57,7 +57,12 @@ export { SearchInput, searchVariants } from './data-entry/search';
 export { Calendar, CalendarDayButton } from './data-entry/calendar';
 export { CitySelect } from './data-entry/city-select';
 export type { CitySelectProps, CitySelectValue } from './data-entry/city-select';
-export { Cascader } from './data-entry/cascader';
+export { 
+  Cascader, 
+  cascaderContainerVariants, 
+  cascaderTriggerVariants, 
+  cascaderOptionVariants 
+} from './data-entry/cascader';
 export type { CascaderProps, CascaderOption, CascaderValue } from './data-entry/cascader';
 export { TagsInput } from './data-entry/tags-input';
 export type { TagsInputProps } from './data-entry/tags-input';
@@ -112,6 +117,19 @@ export {
   sidebarGroupLabelVariants,
   sidebarMenuActionVariants,
 } from './navigation/sidebar';
+export type {
+  SidebarProps,
+  SidebarHeaderProps,
+  SidebarContentProps,
+  SidebarFooterProps,
+  SidebarGroupProps,
+  SidebarGroupLabelProps,
+  SidebarGroupContentProps,
+  SidebarMenuProps,
+  SidebarMenuItemProps,
+  SidebarMenuButtonProps,
+  SidebarMenuActionProps,
+} from './navigation/sidebar';
 export { Tabs, TabsList, TabsTrigger, TabsContent } from './navigation/tabs';
 export { Steps, stepsVariants } from './navigation/steps';
 export type { StepItem, StepsProps } from './navigation/steps';
@@ -124,8 +142,19 @@ export {
   PaginationNext,
   PaginationPrevious,
 } from './navigation/pagination';
-export { Command } from './navigation/command';
+export {
+  Command,
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandShortcut,
+  CommandSeparator,
+} from './navigation/command';
 export { TopNav, topNavVariants } from './navigation/top-nav';
+export type { TopNavProps } from './navigation/top-nav';
 
 // Feedback Components
 export { Alert, AlertTitle, AlertDescription } from './feedback/alert';
@@ -211,4 +240,5 @@ export {
   pageHeaderContentVariants,
 } from './layout/page-header';
 export { BlockLayout, blockLayoutVariants } from './layout/block-layout';
-export { Logo } from './layout/logo'; 
+export { Logo } from './layout/logo';
+export type { LogoProps } from './layout/logo'; 

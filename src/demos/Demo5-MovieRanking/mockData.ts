@@ -42,7 +42,7 @@ export const mockMovies: Movie[] = [
   {
     id: '2',
     title: '惊变28年',
-    poster: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=400&fit=crop',
+    poster: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=300&h=400&fit=crop',
     rating: 7.1,
     ratingCount: 2639,
     genres: ['科幻', '惊悚', '恐怖'],
@@ -56,7 +56,7 @@ export const mockMovies: Movie[] = [
   {
     id: '3',
     title: '罪人',
-    poster: 'https://images.unsplash.com/photo-1489599807777-a5f6b6b7a7d7?w=300&h=400&fit=crop',
+    poster: 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=300&h=400&fit=crop',
     rating: 7.7,
     ratingCount: 42291,
     genres: ['剧情', '犯罪'],
@@ -127,7 +127,7 @@ export const mockMovies: Movie[] = [
   {
     id: '8',
     title: '名侦探柯南：血腥的追踪',
-    poster: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=400&fit=crop',
+    poster: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&h=400&fit=crop',
     rating: 7.9,
     ratingCount: 45672,
     genres: ['动画', '悬疑', '犯罪'],
@@ -144,11 +144,11 @@ export const weeklyRanking: WeeklyRankingItem[] = [
   { id: '1', title: 'F1：狂飙飞车', change: 10 },
   { id: '2', title: '新刺龙之子手', change: 1 },
   { id: '3', title: '线虫战士：余韵之王', change: 0 },
-  { id: '4', title: '罪人', change: 2 },
+  { id: '4', title: '罪人', change: -2 },
   { id: '5', title: '但愿人长久', change: 6 },
-  { id: '6', title: '大风起', change: 5 },
+  { id: '6', title: '大风起', change: -5 },
   { id: '7', title: '名侦探柯南：血腥的追踪', change: 4 },
-  { id: '8', title: '死神来了6：血脉诅咒', change: 3 },
+  { id: '8', title: '死神来了6：血脉诅咒', change: -3 },
   { id: '9', title: '死神来了6：血脉诅咒', change: 2 },
-  { id: '10', title: '制尼重计划', change: 1 }
+  { id: '10', title: '制尼重计划', change: -1 }
 ]; 

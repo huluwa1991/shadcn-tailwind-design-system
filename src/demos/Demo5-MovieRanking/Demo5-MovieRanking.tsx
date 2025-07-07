@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   TopNav,
   PageContainer,
-  Typography,
+  PageHeaderWrapper,
 } from '../../components/ui';
 import { MovieFilters, MovieList, WeeklyRankingSidebar } from './components';
 import { FilterState } from './types';
@@ -12,10 +12,18 @@ export const Demo5: React.FC = () => {
   const [filters, setFilters] = useState<FilterState>({
     category: 'all',
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   // 事件处理函数
   const handleFiltersChange = (newFilters: FilterState) => {
-    setFilters(newFilters);
+    // 显示加载状态
+    setIsLoading(true);
+    
+    // 模拟网络请求延迟
+    setTimeout(() => {
+      setFilters(newFilters);
+      setIsLoading(false);
+    }, 300);
   };
 
   const handleMovieClick = (movieId: string) => {
@@ -80,42 +88,41 @@ export const Demo5: React.FC = () => {
       {/* 主内容区域 */}
       <div className="flex-1 overflow-auto">
         <PageContainer variant="full" padding="nav-layout">
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+          <div className="flex flex-col lg:flex-row gap-8">
             {/* 左侧：电影列表区域 */}
-            <div className="flex-1 lg:flex-[2] flex flex-col gap-6">
-              {/* 页面标题区域 */}
-              <div>
-                <Typography variant="h1" className="mb-2">
-                  豆瓣电影排行榜
-                </Typography>
-                <Typography variant="body" className="text-muted-foreground">
-                  {movieCategories.find(cat => cat.value === filters.category)?.name || '全部'} ·····
-                </Typography>
-              </div>
-
-              {/* 分类筛选工具栏 */}
-              <MovieFilters
-                categories={movieCategories}
-                filters={filters}
-                onFiltersChange={handleFiltersChange}
+            <div className="flex-1 lg:flex-[2] flex flex-col space-y-6">
+              {/* 页面标题和筛选工具栏 */}
+              <PageHeaderWrapper
+                variant="title-with-toolbar"
+                title="豆瓣电影排行榜"
+                filters={
+                  <MovieFilters
+                    categories={movieCategories}
+                    filters={filters}
+                    onFiltersChange={handleFiltersChange}
+                  />
+                }
               />
               
-              {/* 电影列表 */}
+              {/* 电影列表内容区域 */}
               <div className="flex-1">
                 <MovieList
                   movies={filteredMovies}
                   onMovieClick={handleMovieClick}
                   showTitle={false}
+                  isLoading={isLoading}
                 />
               </div>
             </div>
             
-            {/* 右侧：一周口碑榜 */}
+            {/* 右侧：一周口碑榜 - 固定位置 */}
             <div className="w-full lg:w-80 lg:flex-shrink-0">
-              <WeeklyRankingSidebar
-                rankingData={weeklyRanking}
-                onItemClick={handleWeeklyRankingClick}
-              />
+              <div className="lg:sticky lg:top-6">
+                <WeeklyRankingSidebar
+                  rankingData={weeklyRanking}
+                  onItemClick={handleWeeklyRankingClick}
+                />
+              </div>
             </div>
           </div>
         </PageContainer>

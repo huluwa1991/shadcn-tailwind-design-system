@@ -23,7 +23,7 @@ const pageHeaderHeaderVariants = cva(
       variant: {
         'title-only': 'space-y-0',
         'title-with-actions': 'space-y-0',
-        'title-with-toolbar': 'space-y-4',
+        'title-with-toolbar': 'space-y-6',
       },
     },
     defaultVariants: {

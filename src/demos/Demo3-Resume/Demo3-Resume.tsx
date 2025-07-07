@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Upload } from 'lucide-react';
 import {
-  Sidebar,
+  TopNav,
   PageContainer,
   PageHeaderWrapper,
   Typography,
@@ -26,17 +26,8 @@ import { SkillsSection } from './sections/SkillsSection';
 import { ResumeFormSection } from './components';
 
 export const Demo3Resume: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
   const [showUploadDialog, setShowUploadDialog] = useState(false);
   const [showPrivacyAlert, setShowPrivacyAlert] = useState(true);
-
-  // 隐藏body滚动条，防止双滚动条
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
 
   // 使用简历数据管理 hook
   const {
@@ -71,18 +62,34 @@ export const Demo3Resume: React.FC = () => {
     setShowUploadDialog(true);
   };
 
+  // 导航栏事件处理
+  const handleHelpClick = () => {
+    console.log('帮助按钮点击');
+  };
+
+  const handleAvatarClick = () => {
+    console.log('头像点击');
+  };
+
+  const handleLogoClick = () => {
+    console.log('Logo点击');
+  };
+
   return (
-    <div className="flex h-screen w-full bg-sidebar">
-      {/* 侧边栏区域 */}
-      <div>
-        <Sidebar 
-          collapsed={collapsed}
-          onCollapsedChange={setCollapsed}
-        />
-      </div>
+    <div className="flex flex-col h-screen w-full">
+      {/* 顶部导航栏 */}
+      <TopNav
+        isLoggedIn={true}
+        userName="shadcn"
+        avatarFallback="CN"
+        onHelpClick={handleHelpClick}
+        onAvatarClick={handleAvatarClick}
+        onLogoClick={handleLogoClick}
+      />
       
       {/* 主内容区域 */}
-      <PageContainer variant="centered">
+      <div className="flex-1 overflow-auto">
+        <PageContainer variant="centered" padding="nav-layout">
         {/* 页面头部 */}
         <PageHeaderWrapper
           variant="title-with-actions"
@@ -207,7 +214,8 @@ export const Demo3Resume: React.FC = () => {
             />
           </ResumeFormSection>
         </div>
-      </PageContainer>
+        </PageContainer>
+      </div>
 
       {/* 上传简历对话框 */}
       <Modal 

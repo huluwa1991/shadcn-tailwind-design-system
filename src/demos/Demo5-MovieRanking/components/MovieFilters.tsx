@@ -30,7 +30,6 @@ export const MovieFilters: React.FC<MovieFiltersProps> = ({
   }));
 
   return (
-    <div className="mb-6">
       <FilterGroup 
         options={filterOptions}
         selectedValues={[filters.category]}
@@ -39,6 +38,5 @@ export const MovieFilters: React.FC<MovieFiltersProps> = ({
         orientation="horizontal"
         size="default"
       />
-    </div>
   );
 }; 
