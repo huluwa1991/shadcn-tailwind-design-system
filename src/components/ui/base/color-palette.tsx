@@ -37,7 +37,7 @@ interface ColorSectionProps {
 
 const ColorSection: React.FC<ColorSectionProps> = ({ title, children }) => (
   <div className="mb-8">
-    <h3 className="text-lg font-semibold text-foreground mb-4">{title}</h3>
+    <h3 className="text-lg font-medium text-foreground mb-4">{title}</h3>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {children}
     </div>
@@ -48,7 +48,7 @@ export const ColorPalette: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto p-6 bg-background">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">设计系统颜色调色板</h1>
+        <h1 className="text-3xl font-medium text-foreground mb-2">设计系统颜色调色板</h1>
         <p className="text-muted-foreground">
           这里展示了设计系统中所有可用的颜色主题，包括主色调、辅助色、组件色和状态色。
         </p>

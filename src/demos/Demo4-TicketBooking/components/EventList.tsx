@@ -101,7 +101,7 @@ export const EventList: React.FC<EventListProps> = ({
               {/* 左侧：日期 */}
               <div className="flex items-center gap-4">
                 <div className="text-center min-w-[60px]">
-                  <Typography variant="h3" className="font-bold">
+                  <Typography variant="h3" className="font-medium">
                     {formatDate(event.date).split(' ')[1]}
                   </Typography>
                   <Typography variant="body" className="text-sm">
@@ -111,7 +111,7 @@ export const EventList: React.FC<EventListProps> = ({
 
                 {/* 活动信息 */}
                 <div className="flex-1">
-                  <Typography variant="h3" className="font-semibold mb-1">
+                  <Typography variant="h3" className="font-medium mb-1">
                     {event.title}
                   </Typography>
                   <Typography variant="body" className="text-muted-foreground mb-1">

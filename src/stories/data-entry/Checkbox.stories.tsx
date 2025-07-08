@@ -55,7 +55,7 @@ export const Examples: Story = {
     return (
       <div className="flex flex-col gap-6 w-full max-w-md">
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">隐私设置</h3>
+          <h3 className="text-lg font-medium">隐私设置</h3>
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <Checkbox 
@@ -101,7 +101,7 @@ export const Examples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">表单示例</h3>
+          <h3 className="text-lg font-medium">表单示例</h3>
           <div className="space-y-3">
             <div className="flex items-start gap-2">
               <Checkbox id="terms" className="mt-0.5" />

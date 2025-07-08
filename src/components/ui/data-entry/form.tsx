@@ -75,7 +75,7 @@ const formRowVariants = cva("grid gap-4", {
 const formHeaderVariants = cva("space-y-1")
 
 // FormTitle 变体样式
-const formTitleVariants = cva("text-xl font-semibold leading-none tracking-tight")
+const formTitleVariants = cva("text-xl font-medium leading-none tracking-tight")
 
 // FormSubtitle 变体样式
 const formSubtitleVariants = cva("text-sm text-muted-foreground")

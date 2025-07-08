@@ -208,7 +208,7 @@ export const AllVariants: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="text-center">
-        <h3 className="text-lg font-semibold mb-4">基本用法</h3>
+        <h3 className="text-lg font-medium mb-4">基本用法</h3>
         <div className="flex gap-4 justify-center">
           <Tooltip>
             <TooltipTrigger asChild>
@@ -240,7 +240,7 @@ export const AllVariants: Story = {
       </div>
       
       <div className="text-center">
-        <h3 className="text-lg font-semibold mb-4">图标按钮</h3>
+        <h3 className="text-lg font-medium mb-4">图标按钮</h3>
         <div className="flex gap-4 justify-center">
           <Tooltip>
             <TooltipTrigger asChild>
@@ -278,7 +278,7 @@ export const AllVariants: Story = {
       </div>
       
       <div className="text-center">
-        <h3 className="text-lg font-semibold mb-4">不同位置</h3>
+        <h3 className="text-lg font-medium mb-4">不同位置</h3>
         <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
           <Tooltip>
             <TooltipTrigger asChild>

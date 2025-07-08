@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="container mx-auto py-8">
-        <h1 className="text-4xl font-bold text-center mb-8">
+        <h1 className="text-4xl font-medium text-center mb-8">
           设计系统组件库
         </h1>
         <div className="text-center text-muted-foreground">

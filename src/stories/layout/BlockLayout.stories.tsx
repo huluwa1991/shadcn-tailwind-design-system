@@ -109,7 +109,7 @@ export const ReferenceStyle: Story = {
       <div>
         <div className="flex flex-col space-y-1.5">
           <div className="text-sm text-muted-foreground">Total Revenue</div>
-          <div className="font-semibold tracking-tight text-3xl">$15,231.89</div>
+          <div className="font-medium tracking-tight text-3xl">$15,231.89</div>
           <div className="text-sm text-muted-foreground">+20.1% from last month</div>
         </div>
       </div>

@@ -83,7 +83,7 @@ const Logo = React.forwardRef<HTMLDivElement, LogoProps>(
             className="h-5 w-5 text-primary"
           />
           <span 
-            className="font-semibold text-foreground text-base"
+            className="font-medium text-foreground text-base"
           >
             Acme Inc.
           </span>

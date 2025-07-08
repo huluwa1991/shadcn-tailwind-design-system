@@ -41,7 +41,7 @@ export const Default: Story = {
           />
         </div>
         <div className="flex-1 p-6">
-          <h1 className="text-2xl font-bold mb-4">主内容区域</h1>
+          <h1 className="text-2xl font-medium mb-4">主内容区域</h1>
           <p className="text-muted-foreground">
             这里是应用程序的主要内容区域。左侧的 Sidebar 提供了导航功能。
           </p>

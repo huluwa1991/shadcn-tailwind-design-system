@@ -60,11 +60,16 @@
   --color-border: hsl(0 0% 90%);
   --color-input: hsl(0 0% 90%);
   --color-ring: hsl(0 0% 63%);
-  --color-chart-1: hsl(213 77% 78%);
-  --color-chart-2: hsl(213 77% 66%);
-  --color-chart-3: hsl(213 82% 54%);
-  --color-chart-4: hsl(213 82% 47%);
-  --color-chart-5: hsl(213 75% 40%);
+  --color-chart-1: hsl(211.7880 101.9718% 78.6759%);
+  --color-chart-2: hsl(217.4076 91.3672% 59.5787%);
+  --color-chart-3: hsl(221.4336 86.3731% 54.0624%);
+  --color-chart-4: hsl(223.6587 78.7180% 47.8635%);
+  --color-chart-5: hsl(226.5426 70.0108% 39.9224%);
+  --chart-1: hsl(211.7880 101.9718% 78.6759%);
+  --chart-2: hsl(217.4076 91.3672% 59.5787%);
+  --chart-3: hsl(221.4336 86.3731% 54.0624%);
+  --chart-4: hsl(223.6587 78.7180% 47.8635%);
+  --chart-5: hsl(226.5426 70.0108% 39.9224%);
   --color-sidebar: hsl(0 0% 96.3%);
   --color-sidebar-foreground: hsl(0 0% 4%);
   --color-sidebar-primary: hsl(0 0% 9%);
@@ -85,6 +90,11 @@
   --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Source Han Sans SC', 'WenQuanYi Micro Hei', Arial, sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  /* 字重系统 */
+  --font-weight-*: initial;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
   
   /* 圆角系统 */
   --radius: 0.625rem;
@@ -133,6 +143,11 @@
     --color-border: hsl(0 0% 16%);
     --color-input: hsl(0 0% 20%);
     --color-ring: hsl(0 0% 45%);
+    --chart-1: hsl(211.7880 101.9718% 78.6759%);
+    --chart-2: hsl(217.4076 91.3672% 59.5787%);
+    --chart-3: hsl(221.4336 86.3731% 54.0624%);
+    --chart-4: hsl(223.6587 78.7180% 47.8635%);
+    --chart-5: hsl(226.5426 70.0108% 39.9224%);
     --color-sidebar: hsl(220 14% 3.5%);
     --color-sidebar-foreground: hsl(0 0% 98%);
     --color-sidebar-primary: hsl(213 79% 50%);

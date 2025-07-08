@@ -77,22 +77,22 @@ export const ThreeTabs: Story = {
       </TabsList>
       <TabsContent value="overview" className="space-y-4">
         <div className="space-y-2">
-          <h3 className="text-xl font-semibold">数据概览</h3>
+          <h3 className="text-xl font-medium">数据概览</h3>
           <div className="grid grid-cols-2 gap-4">
             <div className="p-4 border rounded-lg">
               <h4 className="font-medium text-blue-600">总用户数</h4>
-              <p className="text-2xl font-bold">12,345</p>
+              <p className="text-2xl font-medium">12,345</p>
             </div>
             <div className="p-4 border rounded-lg">
               <h4 className="font-medium text-green-600">活跃用户</h4>
-              <p className="text-2xl font-bold">8,921</p>
+              <p className="text-2xl font-medium">8,921</p>
             </div>
           </div>
         </div>
       </TabsContent>
       <TabsContent value="analytics" className="space-y-4">
         <div className="space-y-2">
-          <h3 className="text-xl font-semibold">数据分析</h3>
+          <h3 className="text-xl font-medium">数据分析</h3>
           <div className="h-32 bg-slate-100 rounded-lg flex items-center justify-center">
             <p className="text-muted-foreground">图表区域</p>
           </div>
@@ -100,7 +100,7 @@ export const ThreeTabs: Story = {
       </TabsContent>
       <TabsContent value="settings" className="space-y-4">
         <div className="space-y-2">
-          <h3 className="text-xl font-semibold">系统设置</h3>
+          <h3 className="text-xl font-medium">系统设置</h3>
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <span>邮件通知</span>
@@ -249,7 +249,7 @@ export const FullWidth: Story = {
         </TabsList>
         <TabsContent value="products" className="space-y-4">
           <div>
-            <h3 className="text-xl font-semibold">产品管理</h3>
+            <h3 className="text-xl font-medium">产品管理</h3>
             <div className="grid grid-cols-3 gap-4 mt-4">
               <div className="p-4 border rounded-lg">
                 <h4 className="font-medium">产品 A</h4>
@@ -268,19 +268,19 @@ export const FullWidth: Story = {
         </TabsContent>
         <TabsContent value="orders" className="space-y-4">
           <div>
-            <h3 className="text-xl font-semibold">订单管理</h3>
+            <h3 className="text-xl font-medium">订单管理</h3>
             <p className="text-muted-foreground">订单列表和管理功能将在这里显示。</p>
           </div>
         </TabsContent>
         <TabsContent value="customers" className="space-y-4">
           <div>
-            <h3 className="text-xl font-semibold">客户管理</h3>
+            <h3 className="text-xl font-medium">客户管理</h3>
             <p className="text-muted-foreground">客户信息和管理功能将在这里显示。</p>
           </div>
         </TabsContent>
         <TabsContent value="reports" className="space-y-4">
           <div>
-            <h3 className="text-xl font-semibold">数据报表</h3>
+            <h3 className="text-xl font-medium">数据报表</h3>
             <p className="text-muted-foreground">各种统计报表将在这里显示。</p>
           </div>
         </TabsContent>

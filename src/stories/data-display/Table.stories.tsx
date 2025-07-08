@@ -273,7 +273,7 @@ export const HorizontalScroll: Story = {
   render: () => (
     <div className="p-6">
       <div className="mb-4">
-        <h3 className="text-lg font-semibold mb-2">多列数据表格 - 横向滚动</h3>
+        <h3 className="text-lg font-medium mb-2">多列数据表格 - 横向滚动</h3>
         <p className="text-sm text-muted-foreground">
           当列数很多时，表格会自动显示横向滚动条。尝试在较小的屏幕或容器中查看效果。
         </p>
@@ -359,7 +359,7 @@ export const ColumnWidthGuide: Story = {
   render: () => (
     <div className="p-6 space-y-6">
       <div>
-        <h3 className="text-lg font-semibold mb-4">列宽选型指南</h3>
+        <h3 className="text-lg font-medium mb-4">列宽选型指南</h3>
         
         {/* 场景一：表格不超过容器宽度 */}
         <div className="mb-6">
@@ -504,7 +504,7 @@ export const LeftStickyColumns: Story = {
     return (
       <div className="p-6">
         <div className="mb-4">
-          <h3 className="text-lg font-semibold mb-2">左侧列冻结</h3>
+          <h3 className="text-lg font-medium mb-2">左侧列冻结</h3>
           <p className="text-sm text-muted-foreground">
             选择框和姓名列被冻结在左侧，水平滚动时保持固定位置。适用于需要在浏览大量数据时保持关键信息可见的场景。
           </p>
@@ -595,7 +595,7 @@ export const RightStickyColumns: Story = {
     return (
       <div className="p-6">
         <div className="mb-4">
-          <h3 className="text-lg font-semibold mb-2">右侧列冻结</h3>
+          <h3 className="text-lg font-medium mb-2">右侧列冻结</h3>
           <p className="text-sm text-muted-foreground">
             状态和操作列被冻结在右侧，水平滚动时保持固定位置。适用于需要在浏览大量数据时保持操作按钮始终可见的场景。
           </p>
@@ -715,7 +715,7 @@ export const WithPagination: Story = {
     return (
       <div className="p-6 space-y-6">
         <div>
-          <h3 className="text-lg font-semibold mb-2">带分页的表格</h3>
+          <h3 className="text-lg font-medium mb-2">带分页的表格</h3>
           <p className="text-sm text-muted-foreground mb-4">
             演示表格与分页组件的集成使用，支持自动分页逻辑和页码切换。
           </p>
@@ -830,7 +830,7 @@ export const IntegratedPagination: Story = {
     return (
       <div className="p-6 space-y-6">
         <div>
-          <h3 className="text-lg font-semibold mb-2">一体化分页表格</h3>
+          <h3 className="text-lg font-medium mb-2">一体化分页表格</h3>
           <p className="text-sm text-muted-foreground mb-4">
             使用 TableWithPagination 组件，将表格和分页功能整合在一起，提供更简洁的 API。
           </p>
@@ -918,7 +918,7 @@ export const CustomPaginationInfo: Story = {
     return (
       <div className="p-6 space-y-6">
         <div>
-          <h3 className="text-lg font-semibold mb-2">自定义分页信息</h3>
+          <h3 className="text-lg font-medium mb-2">自定义分页信息</h3>
           <p className="text-sm text-muted-foreground mb-4">
             演示自定义分页信息显示格式，可以根据业务需求调整显示内容。
           </p>
