@@ -1,17 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Demo4 as TicketBookingDemo } from '../../demos/Demo4-TicketBooking/Demo4-TicketBooking';
+import { Demo4 } from '../../demos/Demo4-TicketBooking/Demo4-TicketBooking';
 
 const meta = {
-  title: 'Demos/Demo4-TicketBooking',
-  component: TicketBookingDemo,
+  title: 'Demos/04-TicketBooking',
+  component: Demo4,
   parameters: {
     layout: 'fullscreen',
   },
-} satisfies Meta<typeof TicketBookingDemo>;
+} satisfies Meta<typeof Demo4>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  name: '默认状态',
+  name: '票务预订',
+  render: () => <Demo4 />,
 }; 

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Demo } from '../../demos/Demo1-UserManagement/Demo1-UserManagement';
+import { Demo } from '../../demos/Demo1-DataAnalyticsDashboard/Demo1-DataAnalyticsDashboard';
 
 const meta = {
-  title: 'Demos/Demo1-UserManagement',
+  title: 'Demos/01-DataAnalyticsDashboard',
   component: Demo,
   parameters: {
     layout: 'fullscreen',
@@ -13,6 +13,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  name: '用户管理页面',
+  name: '数据分析看板',
   render: () => <Demo />,
 }; 

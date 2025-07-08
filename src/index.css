@@ -3,38 +3,36 @@
 @import "./styles/scrollbar.css";
 
 /* 重写 tw-animate-css 的默认 slide 距离，使其更精致 */
-@layer utilities {
-  .slide-in-from-top {
-    --tw-enter-translate-y: -1rem;
-  }
+@utility slide-in-from-top {
+  --tw-enter-translate-y: -1rem;
+}
 
-  .slide-in-from-bottom {
-    --tw-enter-translate-y: 1rem;
-  }
+@utility slide-in-from-bottom {
+  --tw-enter-translate-y: 1rem;
+}
 
-  .slide-in-from-left {
-    --tw-enter-translate-x: -1rem;
-  }
+@utility slide-in-from-left {
+  --tw-enter-translate-x: -1rem;
+}
 
-  .slide-in-from-right {
-    --tw-enter-translate-x: 1rem;
-  }
+@utility slide-in-from-right {
+  --tw-enter-translate-x: 1rem;
+}
 
-  .slide-out-to-top {
-    --tw-exit-translate-y: -1rem;
-  }
+@utility slide-out-to-top {
+  --tw-exit-translate-y: -1rem;
+}
 
-  .slide-out-to-bottom {
-    --tw-exit-translate-y: 1rem;
-  }
+@utility slide-out-to-bottom {
+  --tw-exit-translate-y: 1rem;
+}
 
-  .slide-out-to-left {
-    --tw-exit-translate-x: -1rem;
-  }
+@utility slide-out-to-left {
+  --tw-exit-translate-x: -1rem;
+}
 
-  .slide-out-to-right {
-    --tw-exit-translate-x: 1rem;
-  }
+@utility slide-out-to-right {
+  --tw-exit-translate-x: 1rem;
 }
 
 @theme {

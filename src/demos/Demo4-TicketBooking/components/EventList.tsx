@@ -22,8 +22,6 @@ const ShareIcon = () => (
   </svg>
 );
 
-
-
 interface EventListProps {
   events: Event[];
   onEventSelect: (eventId: string) => void;
@@ -86,72 +84,72 @@ export const EventList: React.FC<EventListProps> = ({
         </div>
       )}
 
-
-
       {/* 活动计数 */}
       <Typography variant="body">
         {events.length} events near you
       </Typography>
 
       {/* 活动列表 */}
-      <div className="space-y-4">
-        {events.map((event) => (
-          <BlockLayout key={event.id} padding="default">
-            <div className="flex items-center justify-between">
-              {/* 左侧：日期 */}
-              <div className="flex items-center gap-4">
-                <div className="text-center min-w-[60px]">
-                  <Typography variant="h3" className="font-medium">
-                    {formatDate(event.date).split(' ')[1]}
-                  </Typography>
-                  <Typography variant="body" className="text-sm">
-                    {getDayOfWeek(event.date)}
-                  </Typography>
+      <BlockLayout padding="default">
+        <div className="divide-y divide-border -my-4">
+          {events.map((event) => (
+            <div key={event.id} className="py-4">
+              <div className="flex items-center justify-between">
+                {/* 左侧：日期 */}
+                <div className="flex items-center gap-4">
+                  <div className="text-center min-w-[60px]">
+                    <Typography variant="h3" className="font-medium">
+                      {formatDate(event.date).split(' ')[1]}
+                    </Typography>
+                    <Typography variant="body" className="text-sm">
+                      {getDayOfWeek(event.date)}
+                    </Typography>
+                  </div>
+
+                  {/* 活动信息 */}
+                  <div className="flex-1">
+                    <Typography variant="h3" className="font-medium mb-1">
+                      {event.title}
+                    </Typography>
+                    <Typography variant="body" className="text-muted-foreground mb-1">
+                      {event.time} | {event.venue} | {event.city}, {event.country}
+                    </Typography>
+                    {event.hasParking && (
+                      <Tag variant="success" className="text-xs">
+                        Parking available
+                      </Tag>
+                    )}
+                  </div>
                 </div>
 
-                {/* 活动信息 */}
-                <div className="flex-1">
-                  <Typography variant="h3" className="font-medium mb-1">
-                    {event.title}
+                {/* 右侧：操作按钮 */}
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm-icon"
+                    onClick={() => onFavoriteToggle(event.id)}
+                    tooltip={favoriteEvents.includes(event.id) ? "Remove from favorites" : "Add to favorites"}
+                  >
+                    <HeartIcon />
+                  </Button>
+                  
+                  <Typography variant="body" className="text-muted-foreground text-sm">
+                    from {formatPrice(event.price)}
                   </Typography>
-                  <Typography variant="body" className="text-muted-foreground mb-1">
-                    {event.time} | {event.venue} | {event.city}, {event.country}
-                  </Typography>
-                  {event.hasParking && (
-                    <Tag variant="success" className="text-xs">
-                      Parking available
-                    </Tag>
-                  )}
+                  
+                  <Button 
+                    variant="outline"
+                    size="sm"
+                    onClick={() => onEventSelect(event.id)}
+                  >
+                    See Tickets
+                  </Button>
                 </div>
-              </div>
-
-              {/* 右侧：操作按钮 */}
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="ghost"
-                  size="sm-icon"
-                  onClick={() => onFavoriteToggle(event.id)}
-                  tooltip={favoriteEvents.includes(event.id) ? "Remove from favorites" : "Add to favorites"}
-                >
-                  <HeartIcon />
-                </Button>
-                
-                <Typography variant="body" className="text-muted-foreground text-sm">
-                  from {formatPrice(event.price)}
-                </Typography>
-                
-                <Button 
-                  variant="outline"
-                  size="sm"
-                  onClick={() => onEventSelect(event.id)}
-                >
-                  See Tickets
-                </Button>
               </div>
             </div>
-          </BlockLayout>
-        ))}
-      </div>
+          ))}
+        </div>
+      </BlockLayout>
     </div>
   );
 }; 
