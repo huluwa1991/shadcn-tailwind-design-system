@@ -203,11 +203,6 @@ const TimePeriodToggle: React.FC<{
   onSelect: (period: string) => void;
 }> = ({ selected, onSelect }) => {
   const periods = ['最近7天', '最近30天', '最近3个月'];
-  const periodMap: Record<string, string> = {
-    '最近7天': '7天',
-    '最近30天': '30天',
-    '最近3个月': '3个月'
-  };
 
   return (
     <Tabs value={`最近${selected}`} onValueChange={(value) => onSelect(value.replace('最近', ''))}>

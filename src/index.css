@@ -3,36 +3,38 @@
 @import "./styles/scrollbar.css";
 
 /* 重写 tw-animate-css 的默认 slide 距离，使其更精致 */
-@utility slide-in-from-top {
-  --tw-enter-translate-y: -1rem;
-}
+@layer utilities {
+  .slide-in-from-top {
+    --tw-enter-translate-y: -1rem;
+  }
 
-@utility slide-in-from-bottom {
-  --tw-enter-translate-y: 1rem;
-}
+  .slide-in-from-bottom {
+    --tw-enter-translate-y: 1rem;
+  }
 
-@utility slide-in-from-left {
-  --tw-enter-translate-x: -1rem;
-}
+  .slide-in-from-left {
+    --tw-enter-translate-x: -1rem;
+  }
 
-@utility slide-in-from-right {
-  --tw-enter-translate-x: 1rem;
-}
+  .slide-in-from-right {
+    --tw-enter-translate-x: 1rem;
+  }
 
-@utility slide-out-to-top {
-  --tw-exit-translate-y: -1rem;
-}
+  .slide-out-to-top {
+    --tw-exit-translate-y: -1rem;
+  }
 
-@utility slide-out-to-bottom {
-  --tw-exit-translate-y: 1rem;
-}
+  .slide-out-to-bottom {
+    --tw-exit-translate-y: 1rem;
+  }
 
-@utility slide-out-to-left {
-  --tw-exit-translate-x: -1rem;
-}
+  .slide-out-to-left {
+    --tw-exit-translate-x: -1rem;
+  }
 
-@utility slide-out-to-right {
-  --tw-exit-translate-x: 1rem;
+  .slide-out-to-right {
+    --tw-exit-translate-x: 1rem;
+  }
 }
 
 @theme {
@@ -166,37 +168,11 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
   }
 
   * {
-    @apply border-border;
-  }
-
-  /* 保留原有的自定义样式 */
-  .grid-system {
-    @apply grid gap-4 p-4 border border-border rounded-lg bg-card;
-  }
-
-  .grid-system.cols-1 {
-    @apply grid-cols-1;
-  }
-
-  .grid-system.cols-2 {
-    @apply grid-cols-2;
-  }
-
-  .grid-system.cols-3 {
-    @apply grid-cols-3;
-  }
-
-  .grid-system.cols-4 {
-    @apply grid-cols-4;
-  }
-
-  .grid-item {
-    @apply p-4 bg-accent text-accent-foreground rounded border border-border;
+    border-color: var(--color-border);
   }
 }
-
-
