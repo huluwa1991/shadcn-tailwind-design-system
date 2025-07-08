@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Upload } from 'lucide-react';
 import {
   TopNav,
@@ -28,6 +28,14 @@ import { ResumeFormSection } from './components';
 export const Demo3Resume: React.FC = () => {
   const [showUploadDialog, setShowUploadDialog] = useState(false);
   const [showPrivacyAlert, setShowPrivacyAlert] = useState(true);
+
+  // 隐藏body滚动条，防止双滚动条
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
   // 使用简历数据管理 hook
   const {
