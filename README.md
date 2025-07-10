@@ -90,6 +90,41 @@ npm run storybook
 
 查看 [COMPONENT_DEVELOPMENT_SOP.md](./COMPONENT_DEVELOPMENT_SOP.md) 了解开发规范。
 
+## !important 接入方式
+
+由于当前组件库开发尚不完善，预期会有大量对组件的变更，故项目短期不发布于 npm 中。
+其他项目中的接入方式：
+1. 拉取当前项目
+2. 安装依赖
+```bash
+pnpm i
+```
+3. 编译项目
+```bash
+pnpm run build:tsup
+pnpm run build:css
+```
+4. 在待开发项目中 link 该模块
+```bash
+# 开发项目中跟路径，非本组件库路径中
+pnpm link path/of/current/module
+```
+5. 在项目中引入 CSS
+```jsx
+// src/index.tsx
+// 注意不可引入其他组件库的 CSS，否则可能会出现兼容性问题
+import 'shadcn-tailwind-design-system/style.css'
+```
+6. 引入模块
+```jsx
+import { Button } from "shadcn-tailwind-design-system"
+
+export const ShadcnBtn = (...props) => {
+  return <Button {...props}>Btn</Button>
+}
+```
+  
+
 ## 📄 许可证
 
 MIT License - 查看 [LICENSE](LICENSE) 文件了解详情。 
